@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "player.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 721,
+				"h": 319
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "zombie_tilesheet.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 720,
+						"h": 330
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 13,
+						"w": 719,
+						"h": 317
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 719,
+						"h": 317
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:56d2f101b71822f3595926c0b2131c91:77f44f71a1f2dbe0d7721e98b3d78b45:86d5339b780aedd87b35e2b7c0a7e11b$"
+	}
+}
