@@ -3,7 +3,98 @@
   <head>
     <meta charset="UTF-8">
     <title>My Game</title>
-    <script type="text/javascript" src="phaser.min.js"></script>
   </head>
-  <body><script type="text/javascript" src="game.js"></script></body>
+  <body>
+      <div onkeydown="nothing()" id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h1 id="question">Loading Question</h1>
+              <button id="a">a</button>
+              <button id="b">b</button>
+              <button id="c">c</button>
+              <button id="d">d</button>
+            </div>
+
+          </div>
+    </body>
+    <style>
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 100%; /* Could be more or less, depending on screen size */
+  height: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+    <script src="question.js"></script>
+    <script>
+           function nothing() {
+      console.log("nothing");
+    }
+let modal = document.getElementById('myModal');
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
+
+function ask(x,l) {
+    if (l == 1) {
+        document.getElementById('question').innerHTML = qList1[x];
+   document.getElementById('a').innerHTML = aList1[x];
+   document.getElementById('b').innerHTML = bList1[x];
+   document.getElementById('c').innerHTML = cList1[x];
+   document.getElementById('d').innerHTML = dList1[x];
+    } else if(l == 2){
+        document.getElementById('question').innerHTML = qList2[x];
+   document.getElementById('a').innerHTML = aList2[x];
+   document.getElementById('b').innerHTML = bList2[x];
+   document.getElementById('c').innerHTML = cList2[x];
+   document.getElementById('d').innerHTML = dList2[x];
+    }
+
+
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    </script>
+    <script type="text/javascript" src="phaser.min.js"></script>
+    <script type="text/javascript" src="game.js"></script>
 </html>

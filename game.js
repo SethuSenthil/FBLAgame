@@ -16,19 +16,22 @@ let enemy
 let hurt
 let oof
 let platformGroup
+let qTracker = 0;
+let level = 1;
+
 function preload () {
   // Load & Define our game assets
-  game.load.image('sky', 'bg.gif')
-  game.load.image('ground', 'platform.png')
-  game.load.image('dirt', 'ground.png')
-  game.load.image('diamond', 'diamond.png')
-  game.load.image('topLava', 'topLava.png')
-  game.load.image('rock', 'rock.png')
-  game.load.image('lava', 'lava.png')
-  game.load.image('question', 'question.png')
-  game.load.spritesheet('woof', 'woof.png', 32, 32)
-  game.load.spritesheet('woof', 'woof.png', 32, 32)
-  game.load.bitmapFont('pixyfont', 'font.png', 'font.fnt');
+  game.load.image('sky', 'assets/bg.gif')
+  game.load.image('ground', '/assets/platform.png')
+  game.load.image('dirt', '/assets/ground.png')
+  game.load.image('diamond', '/assets/diamond.png')
+  game.load.image('topLava', '/assets/topLava.png')
+  game.load.image('rock', '/assets/rock.png')
+  game.load.image('lava', '/assets/lava.png')
+  game.load.image('question', '/assets/question.png')
+  game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
+  game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
+  game.load.bitmapFont('pixyfont', '/assets/font.png', '/assets/font.fnt');
 }
 
 function create () {
@@ -257,8 +260,8 @@ function collectDiamond (player, diamond) {
 
 function question(player, qblock){
     qblock.kill()
-
-    alert('ask question')
+    ask(qTracker,level);
+    qTracker++;
 }
 function pauser() {
     console.log('paused');
