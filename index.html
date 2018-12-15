@@ -11,10 +11,10 @@
             <div class="modal-content">
               <span class="close">&times;</span>
               <h1 id="question">Loading Question</h1>
-              <button id="a">a</button>
-              <button id="b">b</button>
-              <button id="c">c</button>
-              <button id="d">d</button>
+              <button id="a" onclick="a()">a</button>
+              <button id="b"  onclick="b()">b</button>
+              <button id="c"  onclick="c()">c</button>
+              <button id="d"  onclick="d()">d</button>
             </div>
 
           </div>
@@ -58,15 +58,44 @@
     </style>
     <script src="question.js"></script>
     <script>
+        let exposedLevel = 0;
            function nothing() {
       console.log("nothing");
     }
+    let chosen = '';
+    let validate = () =>{
+        if(chosen === answer1[exposedLevel]){
+       alert('good job');
+       modal.style.display = "none";
+
+   }else{
+       alert('bad')
+   }
+    }
+    function a(){
+    chosen = 'a';
+    validate();
+   }
+   function b(){
+    chosen = 'b';
+    validate();
+   }
+   function c(){
+    chosen = 'c';
+    validate();
+   }
+   function d(){
+    chosen = 'd';
+    validate();
+   }
 let modal = document.getElementById('myModal');
 let btn = document.getElementById("myBtn");
 let span = document.getElementsByClassName("close")[0];
 
+
 function ask(x,l) {
     if (l == 1) {
+        exposedLevel = l-1;
         document.getElementById('question').innerHTML = qList1[x];
    document.getElementById('a').innerHTML = aList1[x];
    document.getElementById('b').innerHTML = bList1[x];
