@@ -5,7 +5,6 @@ const game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   update: update })
 
 // Declare shared variables at the top so all methods can access them
-let score = 0
 let scoreText
 let platforms
 let diamonds
@@ -15,6 +14,7 @@ let qblock
 let enemy
 let hurt
 let oof
+let coinCollect
 let platformGroup
 let qTracker = 0;
 let level = 1;
@@ -32,6 +32,11 @@ function preload () {
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
   game.load.bitmapFont('pixyfont', '/assets/font.png', '/assets/font.fnt');
+  game.load.audio('coin', 'assets/coin.mp3');
+  game.load.audio('bgMusic', 'assets/godsPlan.mp3');
+  game.load.audio('qSound', 'assets/question.mp3');
+
+
 }
 
 function create () {
@@ -51,6 +56,13 @@ function create () {
   platforms.enableBody = true;
   hurt.enableBody = true;
   oof.enableBody = true
+
+
+  qPulse = game.add.audio('qSound');
+  coinCollect = game.add.audio('coin');
+  music = game.add.audio('bgMusic');
+  music.volume = 0.1;
+  music.play();
 
 
     for (var i = 0; i < 80; i++) {
@@ -251,6 +263,7 @@ function update () {
 
 function collectDiamond (player, diamond) {
     // Removes the diamond from the screen
+  coinCollect.play();
   diamond.kill()
 
     //  And update the score
@@ -259,6 +272,7 @@ function collectDiamond (player, diamond) {
 }
 
 function question(player, qblock){
+    qPulse.play;
     qblock.kill()
     ask(qTracker,level);
     qTracker++;
