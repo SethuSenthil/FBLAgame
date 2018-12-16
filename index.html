@@ -23,6 +23,30 @@
             </center>
             </div>
           </div>
+
+          <div onkeydown="nothing()" id="gameStarter" class="modal">
+
+                <div class="modal-content">
+                    <span class="modal-start">
+                    <center>
+                  <h1>Game Name</h1>
+                  <button onclick="startGame()">Start Game</button>
+                  <br>
+                  <br>
+                </center>
+            </span>
+                </div>
+              </div>
+
+              <div style="float: left;">
+                  <h2>Menu</h2>
+                  <br>
+                  <h3>Quit Game</h3>
+                  <h3>Pause Game</h3>
+                  <h3>Credits</h3>
+                  <h3>Open Source/ Licences</h3>
+              </div>
+
           <div id="snackbar">loading message...</div>
     </body>
     <style>
@@ -32,6 +56,10 @@
 }
 *{
     font-family: pixy;
+}
+canvas{
+    margin-left:auto;
+    margin-right:auto;
 }
     .modal {
   display: none; /* Hidden by default */
@@ -54,6 +82,17 @@
   height: 100%;
 }
 
+.modal-start{
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+#gameStarter{
+    display: block;
+}
 /* The Close Button */
 .close {
   color: #aaa;
@@ -127,19 +166,41 @@ button:hover, button:focus {
     </style>
     <script src="question.js"></script>
     <script>
-        let score = 0
-
+        let score = 0;
+        document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        window.location = "/closed.html";
+    }
+};
+function startGame(){
+    document.getElementById('gameStarter').style.display = 'none';
+}
            function nothing() {
       console.log("nothing");
     }
     let chosen = '';
     let validate = () =>{
         if(chosen === answer1[exposedLevel]){
-            snackbar('good job');
+            if(confirm('Good Job! You got it right!'))   document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
        modal.style.display = "none";
        score+=20;
    }else{
-    snackbar('wrong answer')
+       let rightAnswer = '';
+if (level == 1) {
+    switch (answer1[exposedLevel]) {
+             case 'a':
+             rightAnswer = aList1[exposedLevel];
+                 break;
+             case 'b':
+             rightAnswer = bList1[exposedLevel];
+             case 'c':
+             rightAnswer = cList1[exposedLevel];
+             case 'd':
+             rightAnswer = cList1[exposedLevel];
+         }
+}
+    if(confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`))   document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
        console.log('user entered wrong answer');
        modal.style.display = "none";
    }
@@ -171,6 +232,15 @@ let btn = document.getElementById("myBtn");
 
 
 function ask(x,l) {
+    if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
     exposedLevel = x;
     if (l == 1) {
         document.getElementById('question').innerHTML = qList1[x];
