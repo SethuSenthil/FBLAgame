@@ -44,7 +44,7 @@
                         <span class="modal-start">
                         <center>
                       <h1>You Died</h1>
-                      <button onclick="startGame()">Play Again</button>
+                      <button onclick=" location.reload()">Play Again</button>
                       <br>
                       <br>
                     </center>
@@ -69,7 +69,7 @@
                             <div class="modal-content">
                                 <span class="modal-start">
                                 <center>
-                              <h1>Game Credits</h1>
+                              <h1>Licences</h1>
                               Sethu Senthil - Code & Design
                               James Pan - Questions & Content
                               <button onclick="closeCredits()">Close</button>
@@ -85,7 +85,10 @@
                                     <span class="modal-start">
                                     <center>
                                   <h1>Game Credits</h1>
-                                  Licences Here
+                                  <h3><a class="link-lic">phaser</a></h3>
+                                  <h3><a class="link-lic">kenny</a></h3>
+                                  <h3><a class="link-lic">pixel-font</a></h3>
+                                  <h3><a class="link-lic">background-music</a></h3>
                                   <button onclick="closeLibs()">Close</button>
                                   <br>
                                   <br>
@@ -107,7 +110,7 @@
     <style>
         @font-face {
   font-family: pixy;
-  src: url(04B_03__.TTF);
+  src: url(04B_03__.TTF); 
 }
 *{
     font-family: pixy;
@@ -228,6 +231,9 @@ button:hover, button:focus {
         quit();
     }
 };
+for (let i = 0; i < document.getElementsByClassName('link-lic').length; i++) {
+document.getElementsByClassName('link-lic')[i].href = `/licences/${document.getElementsByClassName('link-lic')[i].innerText}.txt`
+}
 function credits(){
     document.getElementById('credits').style.display = 'none';
 }
