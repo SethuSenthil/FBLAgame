@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My Game</title>
   </head>
+  <style type="text/css">* {cursor: url(/assets/cursor.cur), auto !important;}</style><a href="http://www.cursors-4u.com/cursor/2008/12/17/cool-blue-outer-glow-pointer.html" target="_blank" title="Cool Blue Outer Glow Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Cool Blue Outer Glow Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
   <body>
       <div onkeydown="nothing()" id="myModal" class="modal">
 
@@ -37,14 +38,68 @@
             </span>
                 </div>
               </div>
+              <div onkeydown="nothing()" id="lost" class="modal">
 
+                    <div class="modal-content">
+                        <span class="modal-start">
+                        <center>
+                      <h1>You Died</h1>
+                      <button onclick="startGame()">Play Again</button>
+                      <br>
+                      <br>
+                    </center>
+                </span>
+                    </div>
+                  </div>
+                  <div onkeydown="nothing()" id="pause" class="modal">
+
+                        <div class="modal-content">
+                            <span class="modal-start">
+                            <center>
+                          <h1>Game Paused</h1>
+                          <button onclick="res()">Resume</button>
+                          <br>
+                          <br>
+                        </center>
+                    </span>
+                        </div>
+                      </div>
+                      <div onkeydown="nothing()" id="credits" class="modal">
+
+                            <div class="modal-content">
+                                <span class="modal-start">
+                                <center>
+                              <h1>Game Credits</h1>
+                              Sethu Senthil - Code & Design
+                              James Pan - Questions & Content
+                              <button onclick="closeCredits()">Close</button>
+                              <br>
+                              <br>
+                            </center>
+                        </span>
+                            </div>
+                          </div>
+                          <div onkeydown="nothing()" id="libs" class="modal">
+
+                                <div class="modal-content">
+                                    <span class="modal-start">
+                                    <center>
+                                  <h1>Game Credits</h1>
+                                  Licences Here
+                                  <button onclick="closeLibs()">Close</button>
+                                  <br>
+                                  <br>
+                                </center>
+                            </span>
+                                </div>
+                              </div>
               <div style="float: left;">
                   <h2>Menu</h2>
                   <br>
-                  <h3>Quit Game</h3>
-                  <h3>Pause Game</h3>
-                  <h3>Credits</h3>
-                  <h3>Open Source/ Licences</h3>
+                  <h3 onclick="quit()">Quit Game</h3>
+                  <h3 onclick="pause()">Pause Game</h3>
+                  <h3 onclick="credits()">Credits</h3>
+                  <h3 onclick="libs()">Open Source/ Licences</h3>
               </div>
 
           <div id="snackbar">loading message...</div>
@@ -78,7 +133,7 @@ canvas{
 .modal-content {
   background-color: #fefefe;
   border: 1px solid #888;
-  width: 100%; /* Could be more or less, depending on screen size */
+  width: 100%;
   height: 100%;
 }
 
@@ -170,9 +225,30 @@ button:hover, button:focus {
         document.onkeydown = function(evt) {
     evt = evt || window.event;
     if (evt.keyCode == 27) {
-        window.location = "/closed.html";
+        quit();
     }
 };
+function credits(){
+    document.getElementById('credits').style.display = 'none';
+}
+function closeCredits(){
+    document.getElementById('credits').style.display = 'block';
+}
+function libs(){
+    document.getElementById('libs').style.display = 'block';
+}
+function closeLibs(){
+    document.getElementById('libs').style.display = 'none';
+}
+function quit(){
+            window.location = "/closed.html";
+}
+function res(){
+    document.getElementById('pause').style.display = 'none';
+}
+function pause(){
+    document.getElementById('pause').style.display = 'block';
+}
 function startGame(){
     document.getElementById('gameStarter').style.display = 'none';
 }

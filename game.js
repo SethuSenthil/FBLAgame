@@ -126,27 +126,27 @@ function create () {
 
   }
   for (var i = 0; i < 2 ; i++) {
-    let Loopledge = oof.create(892, 314 + (i*64), 'lava')
+    let Loopledge = hurt.create(892, 314 + (i*64), 'lava')
     Loopledge.body.immovable = true
 
   }
   for (var i = 0; i < 2; i++) {
-    let Loopledge = oof.create(956, 314 + (i*64), 'lava')
+    let Loopledge = hurt.create(956, 314 + (i*64), 'lava')
     Loopledge.body.immovable = true
 
   }
   for (var i = 0; i < 2; i++) {
-    let Loopledge = oof.create(1020, 314 + (i*64), 'lava')
+    let Loopledge = hurt.create(1020, 314 + (i*64), 'lava')
     Loopledge.body.immovable = true
 
   }
   for (var i = 0; i < 3; i++) {
-    let Loopledge = oof.create(892  + (i*64),  300, 'topLava')
-    Loopledge.body.immovable = true
+    let Loopledge = hurt.create(892  + (i*64),  300, 'topLava')
+    Loopledge.body.immovable = false
 
   }
   for (var i = 0; i < 3; i++) {
-    let Loopledge = oof.create(892  + (i*64),  442, 'rock')
+    let Loopledge = hurt.create(892  + (i*64),  442, 'rock')
     Loopledge.body.immovable = true
 
   }
@@ -222,6 +222,8 @@ function update () {
   enemy.body.velocity.x = 0
 
 
+
+
   game.physics.arcade.collide(player, platforms)
   game.physics.arcade.collide(player, oof)
   game.physics.arcade.collide(oof, player)
@@ -231,10 +233,9 @@ function update () {
 
 
 
-
   game.physics.arcade.overlap(player, diamonds, collectDiamond, null)
 
-  game.physics.arcade.overlap(player, oof, die, null)
+  game.physics.arcade.overlap(player, hurt, die, null)
 
   game.physics.arcade.overlap(player, qblock, question, null)
 
@@ -283,4 +284,5 @@ function pauser() {
 function die(player, oof) {
   player.kill();
     alert('you died');
+    document.getElementById('lost').style.display = 'block';
 }
