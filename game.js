@@ -1,19 +1,17 @@
-// Initialize the Phaser Game object and set default game window size
 const game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   preload: preload,
   create: create,
   update: update })
 
-  // Declare shared variables at the top so all methods can access them
 let scoreText
 let platforms
 let diamonds
 let cursors
 let player
 let qblock
+let ghost
 let enemy
 let hurt
-let oof
 let coinCollect
 let platformGroup
 let qTracker = 0;
@@ -29,6 +27,10 @@ function preload () {
   game.load.image('rock', '/assets/rock.png')
   game.load.image('lava', '/assets/lava.png')
   game.load.image('question', '/assets/question.png')
+  game.load.image('blade', '/assets/blade.png')
+  game.load.image('hot', '/assets/hot.png')
+  game.load.image('cold', '/assets/cold.png')
+  game.load.image('unstable', '/assets/unstable.png')
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
   game.load.bitmapFont('pixyfont', '/assets/font.png', '/assets/font.fnt');
@@ -72,18 +74,18 @@ function create () {
   game.input.onDown.add(gofull, this);
   platforms = game.add.group();
   hurt = game.add.group();
-  oof = game.add.group();
+  ghost = game.add.group();
 
 
   platforms.enableBody = true;
   hurt.enableBody = true;
-  oof.enableBody = true
+  ghost.enableBody = true
 
 
   qPulse = game.add.audio('qSound');
   coinCollect = game.add.audio('coin');
   music = game.add.audio('bgMusic');
-  music.volume = 0.03;
+  music.volume = 0.12;
   music.play();
 
 
@@ -146,7 +148,7 @@ function create () {
 
   }
   for (var i = 0; i < 3; i++) {
-    let Loopledge = hurt.create(892  + (i*64),  442, 'rock')
+    let Loopledge = ghost.create(892  + (i*64),  442, 'rock')
     Loopledge.body.immovable = true
 
   }
@@ -155,23 +157,92 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = platforms.create((1600 + (i*64)), 430, 'ground')
+    Loopledge.body.immovable = true
 
+  }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = platforms.create((1900 + (i*64)), (430-64), 'unstable')
+    Loopledge.body.immovable = false
 
+  }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = hurt.create((1900 + (i*64)), game.world.height - 128, 'blade')
+    Loopledge.body.immovable = true
 
+  }
 
-    // The player and its settings
+  for (var i = 0; i < 4; i++) {
+    let Loopledge = platforms.create(1080, 250 + (i*64), 'rock')
+    Loopledge.body.immovable = true
+
+  }
+  for (var i = 0; i < 2 ; i++) {
+    let Loopledge = hurt.create(2300, 314 + (i*64), 'lava')
+    Loopledge.body.immovable = true
+
+  }
+  for (var i = 0; i < 2; i++) {
+    let Loopledge = hurt.create(2300 +64, 314 + (i*64), 'lava')
+    Loopledge.body.immovable = true
+
+  }
+  for (var i = 0; i < 2; i++) {
+    let Loopledge = hurt.create(2300 +64, 314 + (i*64), 'lava')
+    Loopledge.body.immovable = true
+
+  }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = hurt.create(2300  + (i*64),  300, 'topLava')
+    Loopledge.body.immovable = false
+
+  }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = ghost.create(2300  + (i*64),  442, 'rock')
+    Loopledge.body.immovable = true
+
+  }
+  for (var i = 0; i < 3; i++) {
+    let Loopledge = platforms.create((2300 + (i*64)), 250, 'unstable')
+    Loopledge.body.immovable = false
+
+  }
+  for (var i = 0; i < 4; i++) {
+    let Loopledge = platforms.create(2235, 250 + (i*64), 'rock')
+    Loopledge.body.immovable = true
+
+  }
+  let Loopledge = platforms.create(2100, 200 + (2*64), 'rock')
+  Loopledge.body.immovable = true
+
+  for (var i = 0; i < 4; i++) {
+    let Loopledge = platforms.create(2235 + (4*64), 250  + (i*64), 'rock')
+    Loopledge.body.immovable = true
+
+  }
+  let skippy = true;
+  for (var i = 0; i < 8; i++) {
+    if(skippy){
+      let Loopledge = platforms.create((2600 + (i*64)), 430, 'cold')
+      Loopledge.body.immovable = true
+      skippy = false;
+    }else{
+      let Loopledge = hurt.create((2600 + (i*64)), 430, 'hot')
+      Loopledge.body.immovable = true
+      skippy = true;
+    }
+
+  }
   player = game.add.sprite(32, game.world.height - 150, 'woof')
 
-    //  We need to enable physics on the player
   game.physics.arcade.enable(player)
 
-    //  Player physics properties. Give the little guy a slight bounce.
   player.body.bounce.y = 0.2
   player.body.gravity.y = 700
 
   player.body.collideWorldBounds = true
 
-    //  Our two animations, walking left and right.
   player.animations.add('left', [0, 1], 10, true)
   player.animations.add('right', [2, 3], 10, true)
 
@@ -181,7 +252,6 @@ function create () {
 
   enemy = game.add.sprite(60, game.world.height - 150, 'woof')
 
-    //  We need to enable physics on the player
   game.physics.arcade.enable(enemy)
 
     enemy.body.bounce.y = 0.2
@@ -197,7 +267,7 @@ function create () {
   diamonds.enableBody = true
   qblock.enableBody = true
 
-  for (var i = 1; i < 20; i++) {
+  for (var i = 1; i < 9; i++) {
     let loopQ = diamonds.create( i * 140, 0, 'diamond')
       loopQ.body.gravity.y = 1000
     loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
@@ -225,8 +295,8 @@ function update () {
 
 
   game.physics.arcade.collide(player, platforms)
-  game.physics.arcade.collide(player, oof)
-  game.physics.arcade.collide(oof, player)
+  game.physics.arcade.collide(player, ghost)
+  game.physics.arcade.collide(ghost, player)
   game.physics.arcade.collide(enemy, platforms)
   game.physics.arcade.collide(diamonds, platforms)
   game.physics.arcade.collide(qblock, platforms)
@@ -263,7 +333,6 @@ function update () {
 
 
 function collectDiamond (player, diamond) {
-    // Removes the diamond from the screen
   coinCollect.play();
   diamond.kill()
 
@@ -281,8 +350,8 @@ function question(player, qblock){
 function pauser() {
     console.log('paused');
 }
-function die(player, oof) {
+function die(player, ghost) {
   player.kill();
-    alert('you died');
+  unfull();
     document.getElementById('lost').style.display = 'block';
 }

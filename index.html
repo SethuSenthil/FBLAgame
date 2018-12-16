@@ -1,116 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>My Game</title>
-  </head>
-  <style type="text/css">* {cursor: url(/assets/cursor.cur), auto !important;}</style><a href="http://www.cursors-4u.com/cursor/2008/12/17/cool-blue-outer-glow-pointer.html" target="_blank" title="Cool Blue Outer Glow Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Cool Blue Outer Glow Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
-  <body>
-      <div onkeydown="nothing()" id="myModal" class="modal">
+</head>
+<style type="text/css">
+    * {
+        cursor: url(/assets/cursor.cur), auto !important;
+    }
+</style><a href="http://www.cursors-4u.com/cursor/2008/12/17/cool-blue-outer-glow-pointer.html" target="_blank" title="Cool Blue Outer Glow Pointer"><img
+        src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Cool Blue Outer Glow Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+    crossorigin="anonymous">
 
-            <div class="modal-content">
-                <center>
-              <h1 id="question">Loading Question</h1>
-              <button id="a" onclick="a()">a</button>
-              <br>
-              <br>
-              <button id="b"  onclick="b()">b</button>
-              <br>
-              <br>
-              <button id="c"  onclick="c()">c</button>
-              <br>
-              <br>
-              <button id="d"  onclick="d()">d</button>
+<body>
+    <div onkeydown="nothing()" id="myModal" class="modal">
+
+        <div class="modal-content">
+            <center>
+                <h1 id="question">Loading Question</h1>
+                <button id="a" onclick="a()">a</button>
+                <br>
+                <br>
+                <button id="b" onclick="b()">b</button>
+                <br>
+                <br>
+                <button id="c" onclick="c()">c</button>
+                <br>
+                <br>
+                <button id="d" onclick="d()">d</button>
             </center>
-            </div>
-          </div>
+        </div>
+    </div>
 
-          <div onkeydown="nothing()" id="gameStarter" class="modal">
+    <div onkeydown="nothing()" id="gameStarter" class="modal">
 
-                <div class="modal-content">
-                    <span class="modal-start">
-                    <center>
-                  <h1>Game Name</h1>
-                  <button onclick="startGame()">Start Game</button>
-                  <br>
-                  <br>
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Game Name</h1>
+                    <button onclick="startGame()">Start Game</button>
+                    <br>
+                    <br>
                 </center>
             </span>
-                </div>
-              </div>
-              <div onkeydown="nothing()" id="lost" class="modal">
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="lost" class="modal">
 
-                    <div class="modal-content">
-                        <span class="modal-start">
-                        <center>
-                      <h1>You Died</h1>
-                      <button onclick=" location.reload()">Play Again</button>
-                      <br>
-                      <br>
-                    </center>
-                </span>
-                    </div>
-                  </div>
-                  <div onkeydown="nothing()" id="pause" class="modal">
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>You Died.</h1>
+                    <button onclick=" location.reload()">Play Again</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="pause" class="modal">
 
-                        <div class="modal-content">
-                            <span class="modal-start">
-                            <center>
-                          <h1>Game Paused</h1>
-                          <button onclick="res()">Resume</button>
-                          <br>
-                          <br>
-                        </center>
-                    </span>
-                        </div>
-                      </div>
-                      <div onkeydown="nothing()" id="credits" class="modal">
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Game Paused</h1>
+                    <button onclick="res()">Resume</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="credits" class="modal">
 
-                            <div class="modal-content">
-                                <span class="modal-start">
-                                <center>
-                              <h1>Licences</h1>
-                              Sethu Senthil - Code & Design
-                              James Pan - Questions & Content
-                              <button onclick="closeCredits()">Close</button>
-                              <br>
-                              <br>
-                            </center>
-                        </span>
-                            </div>
-                          </div>
-                          <div onkeydown="nothing()" id="libs" class="modal">
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Licences</h1>
+                    Sethu Senthil - Code & Design
+                    <br>
+                    James Pan - Questions & Content
+                    <button onclick="closeCredits()">Close</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="libs" class="modal">
 
-                                <div class="modal-content">
-                                    <span class="modal-start">
-                                    <center>
-                                  <h1>Game Credits</h1>
-                                  <h3><a class="link-lic">phaser</a></h3>
-                                  <h3><a class="link-lic">kenny</a></h3>
-                                  <h3><a class="link-lic">pixel-font</a></h3>
-                                  <h3><a class="link-lic">background-music</a></h3>
-                                  <button onclick="closeLibs()">Close</button>
-                                  <br>
-                                  <br>
-                                </center>
-                            </span>
-                                </div>
-                              </div>
-              <div style="float: left;">
-                  <h2>Menu</h2>
-                  <br>
-                  <h3 onclick="quit()">Quit Game</h3>
-                  <h3 onclick="pause()">Pause Game</h3>
-                  <h3 onclick="credits()">Credits</h3>
-                  <h3 onclick="libs()">Open Source/ Licences</h3>
-              </div>
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Game Credits</h1>
+                    <h3><a class="link-lic">phaser</a></h3>
+                    <h3><a class="link-lic">kenny</a></h3>
+                    <h3><a class="link-lic">pixel-font</a></h3>
+                    <h3><a class="link-lic">background-music</a></h3>
+                    <button onclick="closeLibs()">Close</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div style="float: left;">
+        <h2>Menu</h2>
+        <br>
+        <button class="quit">
+            <h3 onclick="quit()"><i class="fas fa-power-off"></i></h3>
+        </button>
+        <button>
+            <h3 onclick="pause()"><i class="fas fa-pause"></i></h3>
+        </button>
+        <button class="expand">
+            <h3 onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen()"><i class="fas fa-expand"></i></h3>
+        </button>
+        <h3 onclick="credits()">Credits</h3>
+        <h3 onclick="libs()">Open Source/ Licences</h3>
+    </div>
 
-          <div id="snackbar">loading message...</div>
-    </body>
-    <style>
-        @font-face {
+    <div id="snackbar">loading message...</div>
+</body>
+<style>
+    @font-face {
   font-family: pixy;
-  src: url(04B_03__.TTF); 
+  src: url(04B_03__.TTF);
 }
 *{
     font-family: pixy;
@@ -180,6 +197,29 @@ button:hover, button:focus {
   background: #76c442;
   box-shadow: inset -6px -6px 0px 0px #4AA52E;
 }
+.quit {
+  background: #E76E55;
+  box-shadow: inset -4px -4px 0px 0px #8C2022;
+}
+.quit:hover, .quit:focus {
+  background: #CE372B;
+  box-shadow: inset -6px -6px 0px 0px #8C2022;
+}
+.quit:active {
+  box-shadow: inset 4px 4px 0px 0px #8C2022;
+}
+.expand {
+  background: #F7D51D;
+  box-shadow: inset -4px -4px 0px 0px #E59400;
+}
+.expand:hover, .expand:focus {
+  background: #F2C409;
+  box-shadow: inset -6px -6px 0px 0px #E59400;
+}
+.expand:active {
+  box-shadow: inset 4px 4px 0px 0px #E59400;
+}
+
 #snackbar {
   visibility: hidden;
   min-width: 250px;
@@ -222,99 +262,116 @@ button:hover, button:focus {
   to {bottom: 0; opacity: 0;}
 }
     </style>
-    <script src="question.js"></script>
-    <script>
-        let score = 0;
-        document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    if (evt.keyCode == 27) {
-        quit();
+<script src="question.js"></script>
+<script>
+    let score = 0;
+    document.onkeydown = function (evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            quit();
+        }
+    };
+    for (let i = 0; i < document.getElementsByClassName('link-lic').length; i++) {
+        document.getElementsByClassName('link-lic')[i].href =
+            `/licences/${document.getElementsByClassName('link-lic')[i].innerText}.txt`
     }
-};
-for (let i = 0; i < document.getElementsByClassName('link-lic').length; i++) {
-document.getElementsByClassName('link-lic')[i].href = `/licences/${document.getElementsByClassName('link-lic')[i].innerText}.txt`
-}
-function credits(){
-    document.getElementById('credits').style.display = 'none';
-}
-function closeCredits(){
-    document.getElementById('credits').style.display = 'block';
-}
-function libs(){
-    document.getElementById('libs').style.display = 'block';
-}
-function closeLibs(){
-    document.getElementById('libs').style.display = 'none';
-}
-function quit(){
-            window.location = "/closed.html";
-}
-function res(){
-    document.getElementById('pause').style.display = 'none';
-}
-function pause(){
-    document.getElementById('pause').style.display = 'block';
-}
-function startGame(){
-    document.getElementById('gameStarter').style.display = 'none';
-}
-           function nothing() {
-      console.log("nothing");
+
+    function credits() {
+        document.getElementById('credits').style.display = 'block';
+    }
+
+    function closeCredits() {
+        document.getElementById('credits').style.display = 'none';
+    }
+
+    function libs() {
+        document.getElementById('libs').style.display = 'block';
+    }
+
+    function closeLibs() {
+        document.getElementById('libs').style.display = 'none';
+    }
+
+    function quit() {
+        window.location = "/closed.html";
+    }
+
+    function res() {
+        document.getElementById('pause').style.display = 'none';
+    }
+
+    function pause() {
+        document.getElementById('pause').style.display = 'block';
+    }
+
+    function startGame() {
+        document.getElementById('gameStarter').style.display = 'none';
+    }
+
+    function nothing() {
+        console.log("nothing");
     }
     let chosen = '';
-    let validate = () =>{
-        if(chosen === answer1[exposedLevel]){
-            if(confirm('Good Job! You got it right!'))   document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
-       modal.style.display = "none";
-       score+=20;
-   }else{
-       let rightAnswer = '';
-if (level == 1) {
-    switch (answer1[exposedLevel]) {
-             case 'a':
-             rightAnswer = aList1[exposedLevel];
-                 break;
-             case 'b':
-             rightAnswer = bList1[exposedLevel];
-             case 'c':
-             rightAnswer = cList1[exposedLevel];
-             case 'd':
-             rightAnswer = cList1[exposedLevel];
-         }
-}
-    if(confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`))   document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
-       console.log('user entered wrong answer');
-       modal.style.display = "none";
-   }
+    let validate = () => {
+        if (chosen === answer1[exposedLevel]) {
+            if (confirm('Good Job! You got it right!')) document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
+            modal.style.display = "none";
+            score += 20;
+        } else {
+            let rightAnswer = '';
+            if (level == 1) {
+                switch (answer1[exposedLevel]) {
+                    case 'a':
+                        rightAnswer = aList1[exposedLevel];
+                        break;
+                    case 'b':
+                        rightAnswer = bList1[exposedLevel];
+                    case 'c':
+                        rightAnswer = cList1[exposedLevel];
+                    case 'd':
+                        rightAnswer = cList1[exposedLevel];
+                }
+            }
+            if (confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`)) document.getElementsByTagName(
+                "CANVAS")[0].webkitRequestFullScreen();
+            console.log('user entered wrong answer');
+            modal.style.display = "none";
+        }
     }
-    function a(){
-    chosen = 'a';
-    validate();
-   }
-   function b(){
-    chosen = 'b';
-    validate();
-   }
-   function c(){
-    chosen = 'c';
-    validate();
-   }
-   function d(){
-    chosen = 'd';
-    validate();
-   }
-   function snackbar(text) {
-  var x = document.getElementById("snackbar");
-  x.innerText = text;
-  x.className = "show";
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-let modal = document.getElementById('myModal');
-let btn = document.getElementById("myBtn");
 
+    function a() {
+        chosen = 'a';
+        validate();
+    }
 
-function ask(x,l) {
-    if (document.exitFullscreen) {
+    function b() {
+        chosen = 'b';
+        validate();
+    }
+
+    function c() {
+        chosen = 'c';
+        validate();
+    }
+
+    function d() {
+        chosen = 'd';
+        validate();
+    }
+
+    function snackbar(text) {
+        var x = document.getElementById("snackbar");
+        x.innerText = text;
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 3000);
+    }
+    let modal = document.getElementById('myModal');
+    let btn = document.getElementById("myBtn");
+
+    function unfull() {
+        if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
@@ -323,27 +380,30 @@ function ask(x,l) {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-    exposedLevel = x;
-    if (l == 1) {
-        document.getElementById('question').innerHTML = qList1[x];
-   document.getElementById('a').innerHTML = aList1[x];
-   document.getElementById('b').innerHTML = bList1[x];
-   document.getElementById('c').innerHTML = cList1[x];
-   document.getElementById('d').innerHTML = dList1[x];
-    } else if(l == 2){
-        document.getElementById('question').innerHTML = qList2[x];
-   document.getElementById('a').innerHTML = aList2[x];
-   document.getElementById('b').innerHTML = bList2[x];
-   document.getElementById('c').innerHTML = cList2[x];
-   document.getElementById('d').innerHTML = dList2[x];
     }
 
+    function ask(x, l) {
+        unfull();
+        exposedLevel = x;
+        if (l == 1) {
+            document.getElementById('question').innerHTML = qList1[x];
+            document.getElementById('a').innerHTML = aList1[x];
+            document.getElementById('b').innerHTML = bList1[x];
+            document.getElementById('c').innerHTML = cList1[x];
+            document.getElementById('d').innerHTML = dList1[x];
+        } else if (l == 2) {
+            document.getElementById('question').innerHTML = qList2[x];
+            document.getElementById('a').innerHTML = aList2[x];
+            document.getElementById('b').innerHTML = bList2[x];
+            document.getElementById('c').innerHTML = cList2[x];
+            document.getElementById('d').innerHTML = dList2[x];
+        }
 
-  modal.style.display = "block";
-}
 
+        modal.style.display = "block";
+    }
+</script>
+<script type="text/javascript" src="phaser.min.js"></script>
+<script type="text/javascript" src="game.js"></script>
 
-    </script>
-    <script type="text/javascript" src="phaser.min.js"></script>
-    <script type="text/javascript" src="game.js"></script>
 </html>
