@@ -10,8 +10,8 @@ let cursors
 let player
 let qblock
 let ghost
-let enemy
 let hurt
+let flager
 let coinCollect
 let platformGroup
 let qTracker = 0;
@@ -30,6 +30,7 @@ function preload () {
   game.load.image('blade', '/assets/blade.png')
   game.load.image('hot', '/assets/hot.png')
   game.load.image('cold', '/assets/cold.png')
+  game.load.image('flag', '/assets/flag.png')
   game.load.image('unstable', '/assets/unstable.png')
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
@@ -75,11 +76,12 @@ function create () {
   platforms = game.add.group();
   hurt = game.add.group();
   ghost = game.add.group();
-
+  flager = game.add.group();
 
   platforms.enableBody = true;
   hurt.enableBody = true;
   ghost.enableBody = true
+  flager.enableBody = true
 
 
   qPulse = game.add.audio('qSound');
@@ -234,6 +236,9 @@ function create () {
     }
 
   }
+  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'flag')
+  ended.body.immovable = true
+
   player = game.add.sprite(32, game.world.height - 150, 'woof')
 
   game.physics.arcade.enable(player)
@@ -250,16 +255,7 @@ function create () {
 
 
 
-  enemy = game.add.sprite(60, game.world.height - 150, 'woof')
 
-  game.physics.arcade.enable(enemy)
-
-    enemy.body.bounce.y = 0.2
-    enemy.body.gravity.y = 700
-    enemy.body.collideWorldBounds = true
-
-  enemy.animations.add('left', [0, 1], 10, true)
-  enemy.animations.add('right', [2, 3], 10, true)
 
   diamonds = game.add.group();
   qblock = game.add.group();
@@ -279,6 +275,7 @@ function create () {
     loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
   }
 
+
   scoreText = game.add.bitmapText(16, 16, 'pixyfont', { fontSize: '32px' });
   scoreText.fixedToCamera = true;
 
@@ -289,15 +286,14 @@ function create () {
 function update () {
 
   player.body.velocity.x = 0
-  enemy.body.velocity.x = 0
 
 
 
 
   game.physics.arcade.collide(player, platforms)
   game.physics.arcade.collide(player, ghost)
+  game.physics.arcade.collide(player, flager)
   game.physics.arcade.collide(ghost, player)
-  game.physics.arcade.collide(enemy, platforms)
   game.physics.arcade.collide(diamonds, platforms)
   game.physics.arcade.collide(qblock, platforms)
 
@@ -306,6 +302,8 @@ function update () {
   game.physics.arcade.overlap(player, diamonds, collectDiamond, null)
 
   game.physics.arcade.overlap(player, hurt, die, null)
+
+  game.physics.arcade.overlap(player, flager, endGame, null)
 
   game.physics.arcade.overlap(player, qblock, question, null)
 
@@ -354,4 +352,12 @@ function die(player, ghost) {
   player.kill();
   unfull();
     document.getElementById('lost').style.display = 'block';
+}
+function endGame(player, flager) {
+  if (qTracker === 5) {
+    player.kill();
+    alert('Good Job! Play level 2');
+  }else{
+     alert('complete all questions')
+  }
 }

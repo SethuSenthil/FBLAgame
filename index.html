@@ -82,6 +82,7 @@
                     Sethu Senthil - Code & Design
                     <br>
                     James Pan - Questions & Content
+                    <br>
                     <button onclick="closeCredits()">Close</button>
                     <br>
                     <br>
@@ -106,17 +107,18 @@
             </span>
         </div>
     </div>
+    <audio id="audio" style="display:none;" src="./assets/click.mp3" ></audio>
     <div style="float: left;">
         <h2>Menu</h2>
         <br>
-        <button class="quit">
-            <h3 onclick="quit()"><i class="fas fa-power-off"></i></h3>
+        <button class="quit" onclick="quit()">
+            <h3><i class="fas fa-power-off"></i></h3>
         </button>
-        <button>
-            <h3 onclick="pause()"><i class="fas fa-pause"></i></h3>
+        <button  onclick="pause()">
+            <h3><i class="fas fa-pause"></i></h3>
         </button>
-        <button class="expand">
-            <h3 onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen()"><i class="fas fa-expand"></i></h3>
+        <button class="expand" onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen()">
+            <h3><i class="fas fa-expand"></i></h3>
         </button>
         <h3 onclick="credits()">Credits</h3>
         <h3 onclick="libs()">Open Source/ Licences</h3>
@@ -277,18 +279,22 @@ button:hover, button:focus {
     }
 
     function credits() {
+        clickSound();
         document.getElementById('credits').style.display = 'block';
     }
 
     function closeCredits() {
+        clickSound();
         document.getElementById('credits').style.display = 'none';
     }
 
     function libs() {
+        clickSound();
         document.getElementById('libs').style.display = 'block';
     }
 
     function closeLibs() {
+        clickSound();
         document.getElementById('libs').style.display = 'none';
     }
 
@@ -297,20 +303,27 @@ button:hover, button:focus {
     }
 
     function res() {
+        clickSound();
         document.getElementById('pause').style.display = 'none';
     }
 
     function pause() {
+        clickSound();
         document.getElementById('pause').style.display = 'block';
     }
 
     function startGame() {
+        clickSound();
         document.getElementById('gameStarter').style.display = 'none';
     }
 
     function nothing() {
         console.log("nothing");
     }
+    function clickSound(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
     let chosen = '';
     let validate = () => {
         if (chosen === answer1[exposedLevel]) {
@@ -340,21 +353,25 @@ button:hover, button:focus {
     }
 
     function a() {
+        clickSound();
         chosen = 'a';
         validate();
     }
 
     function b() {
+        clickSound();
         chosen = 'b';
         validate();
     }
 
     function c() {
+        clickSound();
         chosen = 'c';
         validate();
     }
 
     function d() {
+        clickSound();
         chosen = 'd';
         validate();
     }
