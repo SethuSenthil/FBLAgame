@@ -323,10 +323,6 @@ function update () {
   if (cursors.up.isDown && player.body.touching.down) {
     player.body.velocity.y = -400
   }
-  if (score === 120) {
-    alert('You win!')
-    score = 0
-  }
 }
 
 

@@ -1,0 +1,23 @@
+{
+  "name": "fblagame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SethuSenthil/FBLAgame.git"
+  },
+  "author": "sethu senthil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SethuSenthil/FBLAgame/issues"
+  },
+  "homepage": "https://github.com/SethuSenthil/FBLAgame#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
