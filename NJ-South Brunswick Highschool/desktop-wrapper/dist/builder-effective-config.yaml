@@ -16,4 +16,4 @@ linux:
     - deb
 win:
   target: squirrel
-electronVersion: 3.0.7
+electronVersion: 2.0.16

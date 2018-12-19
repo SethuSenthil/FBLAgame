@@ -1,0 +1,10 @@
+THIS ONLY NEEDS TO BE DONE THE FIRST TIME
+Some computers have security measures that prevent us from running our game scripts. Here is the best way to grant
+permissions in a timeless and secure manner.
+
+On MacOS:
+Open Terminal then paste:
+chmod +x
+click the spacebar and drag and drop the GameMacOs file and click enter
+
+On Windows:

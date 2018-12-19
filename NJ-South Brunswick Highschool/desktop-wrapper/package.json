@@ -1,4 +1,3 @@
-
 {
   "name": "FBLA",
   "version": "0.0.1",
@@ -36,9 +35,11 @@
     },
     "win": {
       "target": "squirrel"
-        }
+    }
   },
-  "dependencies": {},
+  "dependencies": {
+    "electron-builder-squirrel-windows": "^20.38.3"
+  },
   "devDependencies": {
     "electron": "latest",
     "electron-builder": "latest"

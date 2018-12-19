@@ -8,4 +8,4 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 open $parent_path/NJ-South\ Brunswick\ Highschool/desktop-wrapper/dist/mac/FBLA.app
 
-node $parent_path/NJ-South Brunswick Highschool/game-core/server.js
+sh $parent_path/NJ-South\ Brunswick\ Highschool/game-core/nodeRun.sh &  echo "click ctrl c to quit"
