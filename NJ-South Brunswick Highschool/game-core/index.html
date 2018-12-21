@@ -42,6 +42,9 @@
                     <button onclick="startGame()">Start Game</button>
                     <br>
                     <br>
+                    <button onclick="" class="quit">Tutorial</button>
+                    <br>
+                    <br>
                 </center>
             </span>
         </div>
@@ -59,6 +62,22 @@
             </span>
         </div>
     </div>
+    <div onkeydown="nothing()" id="finLevel1" class="modal">
+
+            <div class="modal-content">
+                <span class="modal-start">
+                    <center>
+                        <h1>Level 1 Completed!</h1>
+                        <h1>Score: <span id="scoreShow"></span></h1>
+                        <h1>Time: <span id="showTime"></span> seconds</h1>
+                        <h1>Energy Points: <span id="showEnergy"></span></h1>
+                        <button>Level 2</button>
+                        <br>
+                        <br>
+                    </center>
+                </span>
+            </div>
+        </div>
     <div onkeydown="nothing()" id="pause" class="modal">
 
         <div class="modal-content">
@@ -77,7 +96,7 @@
         <div class="modal-content">
             <span class="modal-start">
                 <center>
-                    <h1>Licences</h1>
+                    <h1>Game Credits</h1>
                     Sethu Senthil - Code & Design
                     <br>
                     James Pan - Questions & Content
@@ -94,11 +113,14 @@
         <div class="modal-content">
             <span class="modal-start">
                 <center>
-                    <h1>Game Credits</h1>
+                    <h1>Licences</h1>
                     <h3><a class="link-lic">phaser</a></h3>
                     <h3><a class="link-lic">kenny</a></h3>
                     <h3><a class="link-lic">pixel-font</a></h3>
                     <h3><a class="link-lic">background-music</a></h3>
+                    <h3><a class="link-lic">sound-effects</a></h3>
+                    <h3><a class="link-lic">electron</a></h3>
+                    <h3><a class="link-lic">nodejs</a></h3>
                     <button onclick="closeLibs()">Close</button>
                     <br>
                     <br>
@@ -106,7 +128,14 @@
             </span>
         </div>
     </div>
-    <audio id="audio" style="display:none;" src="./assets/click.mp3" ></audio>
+    <audio id="audio" src="./assets/click.mp3" ></audio>
+    <audio id="audio1" src="./assets/wrong.mp3" ></audio>
+    <audio id="audio2" src="./assets/question.mp3" ></audio>
+    <audio id="audio3" src="./assets/correct.mp3" ></audio>
+    <audio id="audio4" src="./assets/counter.mp3" ></audio>
+    <audio id="audio5" src="./assets/level.mp3" ></audio>
+
+
     <div style="float: left;">
         <h2>Menu</h2>
         <br>
@@ -116,7 +145,7 @@
         <button  onclick="pause()">
             <h3><i class="fas fa-pause"></i></h3>
         </button>
-        <button class="expand" onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen()">
+        <button class="expand" onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen(); clickSound();">
             <h3><i class="fas fa-expand"></i></h3>
         </button>
         <h3 onclick="credits()">Credits</h3>
@@ -126,6 +155,9 @@
     <div id="snackbar">loading message...</div>
 </body>
 <style>
+    audio{
+        display:none;
+    }
     @font-face {
   font-family: pixy;
   src: url(04B_03__.TTF);
@@ -138,19 +170,18 @@ canvas{
     margin-right:auto;
 }
     .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
   border: 1px solid #888;
@@ -169,7 +200,7 @@ canvas{
 #gameStarter{
     display: block;
 }
-/* The Close Button */
+
 .close {
   color: #aaa;
   float: right;
@@ -263,15 +294,22 @@ button:hover, button:focus {
   to {bottom: 0; opacity: 0;}
 }
     </style>
+<script src="countUp.js"></script>
 <script src="question.js"></script>
 <script>
+    var options = {
+  useEasing: true,
+  useGrouping: true,
+  separator: ',',
+  decimal: '.',
+};
     let score = 0;
     document.onkeydown = function (evt) {
         evt = evt || window.event;
         if (evt.keyCode == 27) {
             quit();
         }else if(evt.keyCode == 77){
-
+           unfull();
         }
     };
     for (let i = 0; i < document.getElementsByClassName('link-lic').length; i++) {
@@ -317,7 +355,11 @@ button:hover, button:focus {
         clickSound();
         document.getElementById('gameStarter').style.display = 'none';
     }
-
+    function level1Comp() {
+        clickSound();
+        unfull();
+        document.getElementById('finLevel1').style.display = 'block';
+    }
     function nothing() {
         console.log("nothing");
     }
@@ -325,13 +367,35 @@ button:hover, button:focus {
        var audio = document.getElementById("audio");
        audio.play();
                  }
+                 function questionSound(){
+       var questionA = document.getElementById("audio2");
+       questionA.play();
+                 }
+                 function wrongSound(){
+       var wrong = document.getElementById("audio1");
+       wrong.play();
+                 }
+                 function correctSound(){
+       var cor = document.getElementById("audio3");
+       cor.play();
+                 }
+       function counterSound(){
+       var counter = document.getElementById("audio4");
+       counter.play();
+                 }
+                 function levelSound(){
+       var levels = document.getElementById("audio5");
+       levels.play();
+                 }
     let chosen = '';
     let validate = () => {
         if (chosen === answer1[exposedLevel]) {
+            correctSound();
             if (confirm('Good Job! You got it right!')) document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
             modal.style.display = "none";
             score += 20;
         } else {
+            wrongSound();
             let rightAnswer = '';
             if (level == 1) {
                 switch (answer1[exposedLevel]) {

@@ -14,8 +14,11 @@ let hurt
 let flager
 let coinCollect
 let platformGroup
+let time = 0
+let swDevice
 let qTracker = 0;
 let level = 1;
+let stopWatchStart = false;
 
 function preload () {
   // Load & Define our game assets
@@ -28,6 +31,7 @@ function preload () {
   game.load.image('lava', '/assets/lava.png')
   game.load.image('question', '/assets/question.png')
   game.load.image('blade', '/assets/blade.png')
+  game.load.image('close', '/assets/close.png')
   game.load.image('hot', '/assets/hot.png')
   game.load.image('cold', '/assets/cold.png')
   game.load.image('flag', '/assets/flag.png')
@@ -80,9 +84,8 @@ function create () {
 
   platforms.enableBody = true;
   hurt.enableBody = true;
-  ghost.enableBody = true
-  flager.enableBody = true
-
+  ghost.enableBody = true;
+  flager.enableBody = true;
 
   qPulse = game.add.audio('qSound');
   coinCollect = game.add.audio('coin');
@@ -226,17 +229,17 @@ function create () {
   let skippy = true;
   for (var i = 0; i < 8; i++) {
     if(skippy){
-      let Loopledge = platforms.create((2600 + (i*64)), 430, 'cold')
+      let Loopledge = platforms.create((2570 + (i*64)), 430, 'cold')
       Loopledge.body.immovable = true
       skippy = false;
     }else{
-      let Loopledge = hurt.create((2600 + (i*64)), 430, 'hot')
+      let Loopledge = hurt.create((2570 + (i*64)), 430, 'hot')
       Loopledge.body.immovable = true
       skippy = true;
     }
 
   }
-  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'flag')
+  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'ground')
   ended.body.immovable = true
 
   player = game.add.sprite(32, game.world.height - 150, 'woof')
@@ -292,7 +295,6 @@ function update () {
 
   game.physics.arcade.collide(player, platforms)
   game.physics.arcade.collide(player, ghost)
-  game.physics.arcade.collide(player, flager)
   game.physics.arcade.collide(ghost, player)
   game.physics.arcade.collide(diamonds, platforms)
   game.physics.arcade.collide(qblock, platforms)
@@ -310,13 +312,16 @@ function update () {
 
 
   if (cursors.left.isDown) {
+    stopWatch();
     player.body.velocity.x = -150
     player.animations.play('left')
   } else if (cursors.right.isDown) {
+    stopWatch();
     player.body.velocity.x = 150
 
     player.animations.play('right')
   } else {
+    stopWatch();
     player.animations.stop()
   }
 
@@ -336,7 +341,7 @@ function collectDiamond (player, diamond) {
 }
 
 function question(player, qblock){
-    qPulse.play;
+    questionSound();
     qblock.kill()
     ask(qTracker,level);
     qTracker++;
@@ -345,15 +350,54 @@ function pauser() {
     console.log('paused');
 }
 function die(player, ghost) {
+  clearInterval(swDevice);
   player.kill();
   unfull();
     document.getElementById('lost').style.display = 'block';
 }
 function endGame(player, flager) {
-  if (qTracker === 5) {
-    player.kill();
-    alert('Good Job! Play level 2');
-  }else{
-     alert('complete all questions')
+  clearInterval(swDevice);
+  player.kill();
+  levelSound();
+  level1Comp();
+  setTimeout(function () {
+    counterSound();
+    var numAnim = new CountUp("scoreShow", 0, score, 0, 2, options);
+  if (!numAnim.error) {
+      numAnim.start();
+  } else {
+      console.error(numAnim.error);
+  }
+
+  setTimeout(function () {
+    counterSound();
+    var numAnim = new CountUp("showTime", 0, time, 0, 2, options);
+  if (!numAnim.error) {
+      numAnim.start();
+  } else {
+      console.error(numAnim.error);
+  }
+
+  setTimeout(function () {
+    counterSound();
+    var numAnim = new CountUp("showEnergy", 0, (score/time), 0, 2, options);
+  if (!numAnim.error) {
+      numAnim.start();
+  } else {
+      console.error(numAnim.error);
+  }
+  }, 1300);
+
+  }, 1300);
+
+  }, 1000);
+
+}
+function stopWatch() {
+  if (!stopWatchStart) {
+    swDevice = window.setInterval(function(){
+      time += 1;
+    }, 1000);
+    stopWatchStart = true;
   }
 }

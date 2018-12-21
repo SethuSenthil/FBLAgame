@@ -6,5 +6,7 @@ On MacOS:
 Open Terminal then paste:
 chmod +x
 click the spacebar and drag and drop the GameMacOs file and click enter
+then drag the file and drop file again in the Terminal and click enter
+Thats it! The game should have launched by now!
 
 On Windows:
