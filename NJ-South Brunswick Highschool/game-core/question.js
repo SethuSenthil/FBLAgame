@@ -6,9 +6,9 @@ let cList1 = ['Future Business in Los Angeles','150,000','Blue and Red','9','New
 let dList1 = ['Ford Business Learning Association','200,000','Green, Blue, and Red','7','Maryland'];
 let answer1 = ['a','b','a','c','a'];
 
-let qList2 = ['Whats are the three words on the FBLA emblem?','Who is the CEO and President of FBLA?','FBLA and PBL are divided into___aministrative regions?','The FBLA-PBL national center is located where?','Who are the sponsors for FBLA?'];
-let aList2 = ['Future, Business, Leader','Eu Ro Wang','7','New York City, NewYork','Verizon'];
-let bList2 = ['Service, Education, and Progress','Phillip Yamashiro','9','Trenton, New Jersey','Walmart Stores'];
-let cList2 = ['Progresive, Leader, Manager','Nathan Pan','3','Reston, Virgina','Geico'];
-let dList2 = ['Learned, Business, Skills','Sethu Senthil','5','Los Angeles, California','All of the Above'];
-let answer2 = ['b','a','d','c','d'];
+let qList2 = ['Whats are the three words on the FBLA emblem?','Who is the CEO and President of FBLA?','FBLA and PBL are divided into___aministrative regions?','The FBLA-PBL national center is located where?','How many votes would a chapter of 99 members have at the National Leadership Conference?'];
+let aList2 = ['Future, Business, Leader','Eu Ro Wang','7','New York City, NewYork','2'];
+let bList2 = ['Service, Education, and Progress','Phillip Yamashiro','9','Trenton, New Jersey','4'];
+let cList2 = ['Progresive, Leader, Manager','Nathan Pan','3','Reston, Virgina','3'];
+let dList2 = ['Learned, Business, Skills','Sethu Senthil','5','Los Angeles, California','5'];
+let answer2 = ['b','a','d','c','c'];
