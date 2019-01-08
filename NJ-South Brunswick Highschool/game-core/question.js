@@ -1,9 +1,9 @@
 //questions and answer choices
-let qList1 = ['What does FBLA stand for?','What’s the minimum # of pretzel sticks we had to sell?','What’s the official colors for FBLA?','How many points do you need to become a member?','The first FBLA state is...'];
-let aList1 = ['Future Business Leaders of America','25','Blue and Gold','50','Iowa'];
-let bList1 = ['Future Business Leaders of Australia','30','Red, White, and Blue','40','New York'];
-let cList1 = ['Future Business in Los Angeles','15','Blue and Red','35','New Jersey'];
-let dList1 = ['Ford Business Learning Association','20','Green, Blue, and Red','25','Maryland'];
+let qList1 = ['What does FBLA stand for?','How many members does FBLA have?','What’s the official colors for FBLA?','How many goals does FBLA have?','The first FBLA state is...'];
+let aList1 = ['Future Business Leaders of America','250,000','Blue and Gold','5','Iowa'];
+let bList1 = ['Future Business Leaders of Australia','300,000','Red, White, and Blue','10','New York'];
+let cList1 = ['Future Business in Los Angeles','150,000','Blue and Red','9','New Jersey'];
+let dList1 = ['Ford Business Learning Association','200,000','Green, Blue, and Red','7','Maryland'];
 let answer1 = ['a','b','a','c','a'];
 
 let qList2 = ['Whats are the three words on the FBLA emblem?','Who is the CEO and President of FBLA?','FBLA and PBL are divided into___aministrative regions?','The FBLA-PBL national center is located where?','Who are the sponsors for FBLA?'];
