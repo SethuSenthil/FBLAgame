@@ -163,14 +163,14 @@ function create () {
   }
 
   //creates unstable grounds where player falls easily
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     let Loopledge = platforms.create((1900 + (i*64)), (430-64), 'unstable')
     Loopledge.body.immovable = false
 
   }
 
   //creates blades in ground
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     let Loopledge = hurt.create((1900 + (i*64)), game.world.height - 128, 'blade')
     Loopledge.body.immovable = true
 
