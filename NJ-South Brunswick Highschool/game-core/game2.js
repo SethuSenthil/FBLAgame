@@ -18,13 +18,14 @@ let ghost
 let hurt
 let enemyBound
 let flager
-let depends = 150;
+let change = false;
+let depends = 75;
 let coinCollect
 let platformGroup
 let time = 0
 let swDevice
 let qTracker = 0;
-let level = 1;
+let level = 2;
 let stopWatchStart = false;
 
   //Preload game assets with ID's
@@ -40,6 +41,8 @@ function preload () {
   game.load.image('blade', '/assets/blade.png')
   game.load.image('close', '/assets/close.png')
   game.load.image('hot', '/assets/hot.png')
+  game.load.image('enemyCat', '/assets/enemy.png')
+  game.load.image('blueBlock', '/assets/blueBlock.png')
   game.load.image('cold', '/assets/cold.png')
   game.load.image('flag', '/assets/flag.png')
   game.load.image('unstable', '/assets/unstable.png')
@@ -119,41 +122,36 @@ function create () {
   ledge.body.immovable = true
 
   // creates  3 row ground
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 5; i++) {
     let Loopledge = platforms.create((550 + (i*64)), 350, 'ground')
     Loopledge.body.immovable = true
 
   }
- // START: Lava box
-     //creates left ledges
   for (var i = 0; i < 3; i++) {
-    let Loopledge = enemyBound.create((1080 + (i*64)), 250, 'rock')
+    let Loopledge = platforms.create((550 + (64*7) +(i*64)), 250, 'ground')
     Loopledge.body.immovable = true
 
   }
   for (var i = 0; i < 3; i++) {
-    let Loopledge = enemyBound.create(828, 250 + (i*64), 'rock')
-    Loopledge.body.immovable = true
+    if(i === 0 || i=== 2){
+      let Loopledge = enemyBound.create((550 + (64*7) + (64*3) +(i*64)), 150, 'ground')
+      Loopledge.body.immovable = true
+    }else{
+      let Loopledge = platforms.create((550 + (64*7) + (64*3) +(i*64)), 150, 'ground')
+      Loopledge.body.immovable = true
+    }
 
   }
   for (var i = 0; i < 3; i++) {
-    let Loopledge = enemyBound.create(1080, 250 + (i*64), 'rock')
+    let Loopledge = platforms.create((900 + (64*7) +(i*64)), 250, 'ground')
     Loopledge.body.immovable = true
 
   }
-   //creates right ledges for holder
-  for (var i = 0; i < 3; i++) {
-    let Loopledge = enemyBound.create(892  + (i*64),  442, 'rock')
+  for (var i = 0; i < 12; i++) {
+    let Loopledge = hurt.create((900 + (i*64)), game.world.height - 128, 'blade')
     Loopledge.body.immovable = true
 
   }
-  for (var i = 0; i < 2; i++) {
-    let Loopledge = enemyBound.create((700 + (i*64)), 250, 'rock')
-    Loopledge.body.immovable = true
-
-  }
-
-  //END: Lava box
 
   //creates some floating ledges
   for (var i = 0; i < 3; i++) {
@@ -176,80 +174,55 @@ function create () {
 
   }
 
-
-  //START: Lava box
-  for (var i = 0; i < 4; i++) {
-    let Loopledge = platforms.create(1080, 250 + (i*64), 'rock')
-    Loopledge.body.immovable = true
-
-  }
-  for (var i = 0; i < 2 ; i++) {
-    let Loopledge = hurt.create(2300, 314 + (i*64), 'lava')
-    Loopledge.body.immovable = true
-
-  }
-  for (var i = 0; i < 2; i++) {
-    let Loopledge = hurt.create(2300 +64, 314 + (i*64), 'lava')
-    Loopledge.body.immovable = true
-
-  }
-  for (var i = 0; i < 2; i++) {
-    let Loopledge = hurt.create(2300 +64, 314 + (i*64), 'lava')
-    Loopledge.body.immovable = true
-
-  }
-  for (var i = 0; i < 3; i++) {
-    let Loopledge = hurt.create(2300  + (i*64),  300, 'topLava')
-    Loopledge.body.immovable = false
-
-  }
-  for (var i = 0; i < 3; i++) {
-    let Loopledge = ghost.create(2300  + (i*64),  442, 'rock')
-    Loopledge.body.immovable = true
-
-  }
-  //END: Lava box
-
-  //Creates unstable elements where player easily falls
-  for (var i = 0; i < 3; i++) {
-    let Loopledge = platforms.create((2300 + (i*64)), 250, 'unstable')
-    Loopledge.body.immovable = false
-
-  }
-  for (var i = 0; i < 4; i++) {
-    let Loopledge = platforms.create(2235, 250 + (i*64), 'rock')
-    Loopledge.body.immovable = true
-
-  }
-  let Loopledge = platforms.create(2100, 200 + (2*64), 'rock')
-  Loopledge.body.immovable = true
-
-  for (var i = 0; i < 4; i++) {
-    let Loopledge = platforms.create(2235 + (4*64), 250  + (i*64), 'rock')
-    Loopledge.body.immovable = true
-
-  }
-
   //creates the red and green boxes which alternate
   let skippy = true;
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < 6; i++) {
     if(skippy){
-      let Loopledge = platforms.create((2570 + (i*64)), 430, 'cold')
+      let Loopledge = platforms.create((2100 + (i*64)), 430, 'cold')
       Loopledge.body.immovable = true
       skippy = false;
     }else{
-      let Loopledge = hurt.create((2570 + (i*64)), 430, 'hot')
+      let Loopledge = hurt.create((2100 + (i*64)), 430, 'hot')
       Loopledge.body.immovable = true
       skippy = true;
     }
 
   }
-  //the flag that marks the end of level
-  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'ground')
+
+  for (var i = 0; i < 9; i++) {
+    let Loopledge = platforms.create((2600 + (i*64)), 430, 'blueBlock')
+    Loopledge.body.immovable = trueOrFalse();
+
+  }
+
+  function trueOrFalse() {
+    let ranNumm = Math.round(Math.random() *  2);
+    if (ranNumm == 2) {
+      return false;
+    } else if(ranNumm == 1){
+     return true;
+    }else{
+      return false;
+    }
+  }
+  let skippy2 = true;
+  for (var i = 0; i < 9; i++) {
+    if(skippy2){
+      let Loopledge = hurt.create((2600 + (i*64)), game.world.height - 128, 'blade')
+      Loopledge.body.immovable = true;
+      skippy2 = false;
+    }else{
+      skippy2 = true;
+    }
+
+
+  }
+  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'blueblock')
   ended.body.immovable = true
 
-  player = game.add.sprite(32, game.world.height - 150, 'woof')
-  enemy = game.add.sprite(800, game.world.height - 400, 'woof')
+  player = game.add.sprite(32, game.world.height - 700, 'woof')
+  enemy = game.add.sprite(700,-80  , 'enemyCat')
+
 
   game.physics.arcade.enable(player)
   game.physics.arcade.enable(enemy)
@@ -284,10 +257,14 @@ function create () {
   diamonds.enableBody = true
   qblock.enableBody = true
 
-  for (var i = 1; i < 9; i++) {
-    let loopQ = diamonds.create( i * 140, 0, 'diamond')
+  for (var i = 1; i < 25; i++) {
+    if(i>= 12 && i <= 19){
+
+    } else{
+      let loopQ = diamonds.create( i * 140, 0, 'diamond')
       loopQ.body.gravity.y = 1000
     loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
+    }
   }
 
   for (var i = 1; i < 5; i++) {
@@ -309,8 +286,13 @@ function create () {
 function update () {
 
   player.body.velocity.x = 0
+if(change){
+  enemy.body.velocity.x = (depends * -1);
+  enemy.animations.play('left');
+}else{
   enemy.body.velocity.x = depends;
-
+  enemy.animations.play('right');
+}
 
 
 
@@ -322,16 +304,15 @@ function update () {
   game.physics.arcade.collide(enemyBound, qblock)
   game.physics.arcade.collide(enemy, enemyBound)
   game.physics.arcade.collide(player, enemyBound)
-  game.physics.arcade.collide(player, enemy)
   game.physics.arcade.collide(qblock, platforms)
 
 
 
   game.physics.arcade.overlap(player, diamonds, collectDiamond, null)
 
-  game.physics.arcade.overlap(enemy, enemyBound, changeDir, null)
-
   game.physics.arcade.overlap(player, hurt, die, null)
+
+  game.physics.arcade.overlap(player, enemy, die, null)
 
   game.physics.arcade.overlap(player, flager, endGame, null)
 
@@ -378,7 +359,7 @@ function pauser() {
     console.log('paused');
 }
 function die(player, ghost) {
-  clearInterval(swDevice);
+  clearInterval(swDevice); //stops timer
   player.kill();
   unfull();
 
@@ -444,3 +425,10 @@ function stopWatch() {
     stopWatchStart = true;
   }
 }
+window.setInterval(function(){
+  if(change){
+    change = false;
+  }else{
+    change = true;
+  }
+}, 3000);

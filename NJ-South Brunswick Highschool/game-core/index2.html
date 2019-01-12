@@ -67,14 +67,14 @@
             <div class="modal-content">
                 <span class="modal-start">
                     <center>
-                        <h1 id="lvl1-head" class="shower">Level 1 Completed!</h1>
+                        <h1 id="lvl1-head" class="shower">Level 2 Completed!</h1>
                         <br>
                         <h1 class="shower" id="section-score">Score: <span id="scoreShow"></span></h1>
                         <h1 class="shower" id="section-time"><i class="fas fa-stopwatch"></i> : <span id="showTime"></span> seconds</h1>
                         <h1 class="shower" id="section-energy"><i class="fas fa-bolt"></i> : <span id="showEnergy"></span></h1>
                         <button class="shower expand" id="btn-leaderboard">Post on Leaderboard</button>
                         <br>
-                        <button class="shower" id="btn-nextLevel">Level 2</button>
+                        <button class="shower" id="btn-nextLevel">Level 3</button>
                         <br>
                         <br>
                     </center>
@@ -464,17 +464,17 @@ window.setTimeout(function () {
         } else {
             wrongSound();
             let rightAnswer = '';
-            if (level == 1) {
+            if (level == 2) {
                 switch (answer1[exposedLevel]) {
                     case 'a':
-                        rightAnswer = aList1[exposedLevel];
+                        rightAnswer = aList2[exposedLevel];
                         break;
                     case 'b':
-                        rightAnswer = bList1[exposedLevel];
+                        rightAnswer = bList2[exposedLevel];
                     case 'c':
-                        rightAnswer = cList1[exposedLevel];
+                        rightAnswer = cList2[exposedLevel];
                     case 'd':
-                        rightAnswer = dList1[exposedLevel];
+                        rightAnswer = dList2[exposedLevel];
                 }
             }
             if (confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`)) document.getElementsByTagName(
@@ -535,14 +535,8 @@ window.setTimeout(function () {
     function ask(x, l) {
         unfull();
         exposedLevel = x;
-        if (l == 1) { //if level 1
+        if (l == 2) { //if level 1
             //then fill the HTML question template with the following info
-            document.getElementById('question').innerHTML = qList1[x];
-            document.getElementById('a').innerHTML = aList1[x];
-            document.getElementById('b').innerHTML = bList1[x];
-            document.getElementById('c').innerHTML = cList1[x];
-            document.getElementById('d').innerHTML = dList1[x];
-        } else if (l == 2) {
             document.getElementById('question').innerHTML = qList2[x];
             document.getElementById('a').innerHTML = aList2[x];
             document.getElementById('b').innerHTML = bList2[x];
