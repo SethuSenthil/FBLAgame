@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FBLA game {GAME NAME HERE}</title>
+    <title>FBLA - Cat Rush</title>
 </head>
 <style type="text/css">
     * {
@@ -38,13 +38,14 @@
         <div class="modal-content">
             <span class="modal-start">
                 <center>
-                    <h1>Game Name</h1>
+                    <h1>Cat Rush</h1>
                     <button onclick="startGame()">Start Game</button>
                     <br>
                     <br>
-                    <button onclick="" class="quit">Tutorial</button>
+                    <button onclick="tutorial()" class="quit">Tutorial</button>
                     <br>
                     <br>
+                    <button onclick="" class="close">Leader Board</button>
                 </center>
             </span>
         </div>
@@ -67,11 +68,14 @@
             <div class="modal-content">
                 <span class="modal-start">
                     <center>
-                        <h1>Level 1 Completed!</h1>
-                        <h1>Score: <span id="scoreShow"></span></h1>
-                        <h1>Time: <span id="showTime"></span> seconds</h1>
-                        <h1>Energy Points: <span id="showEnergy"></span></h1>
-                        <button>Level 2</button>
+                        <h1 id="lvl1-head" class="shower">Level 1 Completed!</h1>
+                        <br>
+                        <h1 class="shower" id="section-score">Score: <span id="scoreShow"></span></h1>
+                        <h1 class="shower" id="section-time"><i class="fas fa-stopwatch"></i> : <span id="showTime"></span> seconds</h1>
+                        <h1 class="shower" id="section-energy"><i class="fas fa-bolt"></i> : <span id="showEnergy"></span></h1>
+                        <button class="shower expand" id="btn-leaderboard">Post on Leaderboard</button>
+                        <br>
+                        <button class="shower" id="btn-nextLevel" onclick="window.location.href = './index2.html'">Level 2</button>
                         <br>
                         <br>
                     </center>
@@ -91,6 +95,21 @@
             </span>
         </div>
     </div>
+    <div onkeydown="nothing()" id="tutorial" class="modal">
+
+            <div class="modal-content">
+                <span class="modal-start">
+                    <center>
+                        <h1>Tutorial</h1>
+                        <br>
+                        <video src="./assets/tot.mp4" controls></video>
+                        <div id="keyPrompt">
+
+                        </div>
+                    </center>
+                </span>
+            </div>
+        </div>
     <div onkeydown="nothing()" id="credits" class="modal">
 
         <div class="modal-content">
@@ -293,10 +312,41 @@ button:hover, button:focus {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+.shower {
+	display: none;
+	height: 0;
+	overflow: hidden;
+	transition: height 350ms ease-in-out;
+}
+.shower.is-visible {
+	display: block;
+	height: auto;
+}
     </style>
 <script src="countUp.js"></script>
 <script src="question.js"></script>
 <script>
+    var show = function (domObj) {
+        let elem = document.getElementById(domObj);
+// Get the natural height of the element
+var getHeight = function () {
+    elem.style.display = 'block'; // Make it visible
+    var height = elem.scrollHeight + 'px'; // Get it's height
+    elem.style.display = ''; //  Hide it again
+    return height;
+};
+
+var height = getHeight(); // Get the natural height
+elem.classList.add('is-visible'); // Make the element visible
+elem.style.height = height; // Update the max-height
+
+// Once the transition is complete, remove the inline max-height so the content can scale responsively
+window.setTimeout(function () {
+    elem.style.height = '';
+}, 350);
+
+};
+
     var options = {
   useEasing: true,
   useGrouping: true,
@@ -316,7 +366,11 @@ button:hover, button:focus {
         document.getElementsByClassName('link-lic')[i].href =
             `/licences/${document.getElementsByClassName('link-lic')[i].innerText}.txt`
     }
+    function totPlay(params) {
 
+    }
+
+    //bunch of classic JS functions to easily make element visible or invisible
     function credits() {
         clickSound();
         document.getElementById('credits').style.display = 'block';
@@ -355,39 +409,53 @@ button:hover, button:focus {
         clickSound();
         document.getElementById('gameStarter').style.display = 'none';
     }
-    function level1Comp() {
+    function startGame() {
         clickSound();
+        document.getElementById('gameStarter').style.display = 'none';
+    }
+    function tutorial() {
+        clickSound();
+        document.getElementById('tutorial').style.display = 'block';
+    }
+
+    //when level 1 completed
+    function level1Comp() {
         unfull();
         document.getElementById('finLevel1').style.display = 'block';
+        show('lvl1-head');
     }
     function nothing() {
         console.log("nothing");
     }
+
+    //bunch of functions to call sounds
     function clickSound(){
-       var audio = document.getElementById("audio");
+        let audio = document.getElementById("audio");
        audio.play();
                  }
                  function questionSound(){
-       var questionA = document.getElementById("audio2");
+                    let questionA = document.getElementById("audio2");
        questionA.play();
                  }
                  function wrongSound(){
-       var wrong = document.getElementById("audio1");
+                    let wrong = document.getElementById("audio1");
        wrong.play();
                  }
                  function correctSound(){
-       var cor = document.getElementById("audio3");
+                    let cor = document.getElementById("audio3");
        cor.play();
                  }
        function counterSound(){
-       var counter = document.getElementById("audio4");
+        let counter = document.getElementById("audio4");
        counter.play();
                  }
                  function levelSound(){
-       var levels = document.getElementById("audio5");
+       let levels = document.getElementById("audio5");
        levels.play();
                  }
     let chosen = '';
+
+    //validate function to see if the user put the right answer
     let validate = () => {
         if (chosen === answer1[exposedLevel]) {
             correctSound();
@@ -416,7 +484,7 @@ button:hover, button:focus {
             modal.style.display = "none";
         }
     }
-
+//track what the user clicked
     function a() {
         clickSound();
         chosen = 'a';
@@ -452,10 +520,11 @@ button:hover, button:focus {
     let modal = document.getElementById('myModal');
     let btn = document.getElementById("myBtn");
 
+    //get out of fullscreen
     function unfull() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
+        } else if (document.webkitExitFullscreen) { //this is the one for chromeumium (which our desktop client uses)
             document.webkitExitFullscreen();
         } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
@@ -463,11 +532,12 @@ button:hover, button:focus {
             document.msExitFullscreen();
         }
     }
-
+//selects a random question and answer choices from question.js
     function ask(x, l) {
         unfull();
         exposedLevel = x;
-        if (l == 1) {
+        if (l == 1) { //if level 1
+            //then fill the HTML question template with the following info
             document.getElementById('question').innerHTML = qList1[x];
             document.getElementById('a').innerHTML = aList1[x];
             document.getElementById('b').innerHTML = bList1[x];

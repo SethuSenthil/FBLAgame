@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>FBLA - Cat Rush</title>
+</head>
+<style type="text/css">
+    * {
+        cursor: url(/assets/cursor.cur), auto !important;
+    }
+</style><a href="http://www.cursors-4u.com/cursor/2008/12/17/cool-blue-outer-glow-pointer.html" target="_blank" title="Cool Blue Outer Glow Pointer"><img
+        src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Cool Blue Outer Glow Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
+<link rel="stylesheet" href="fa/css/all.min.css">
+<body>
+    <div onkeydown="nothing()" id="myModal" class="modal">
+
+        <div class="modal-content">
+            <center>
+                <h1 id="question">Loading Question</h1>
+                <button id="a" onclick="a()">a</button>
+                <br>
+                <br>
+                <button id="b" onclick="b()">b</button>
+                <br>
+                <br>
+                <button id="c" onclick="c()">c</button>
+                <br>
+                <br>
+                <button id="d" onclick="d()">d</button>
+            </center>
+        </div>
+    </div>
+
+    <div onkeydown="nothing()" id="gameStarter" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Cat Rush</h1>
+                    <button onclick="startGame()">Start Game</button>
+                    <br>
+                    <br>
+                    <button onclick="tutorial()" class="quit">Tutorial</button>
+                    <br>
+                    <br>
+                    <button onclick="" class="close">Leader Board</button>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="lost" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>You Died.</h1>
+                    <button onclick=" location.reload()">Play Again</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="finLevel1" class="modal">
+
+            <div class="modal-content">
+                <span class="modal-start">
+                    <center>
+                        <h1 id="lvl1-head" class="shower">Level 1 Completed!</h1>
+                        <br>
+                        <h1 class="shower" id="section-score">Score: <span id="scoreShow"></span></h1>
+                        <h1 class="shower" id="section-time"><i class="fas fa-stopwatch"></i> : <span id="showTime"></span> seconds</h1>
+                        <h1 class="shower" id="section-energy"><i class="fas fa-bolt"></i> : <span id="showEnergy"></span></h1>
+                        <button class="shower expand" id="btn-leaderboard">Post on Leaderboard</button>
+                        <br>
+                        <button class="shower" id="btn-nextLevel">Level 2</button>
+                        <br>
+                        <br>
+                    </center>
+                </span>
+            </div>
+        </div>
+    <div onkeydown="nothing()" id="pause" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Game Paused</h1>
+                    <button onclick="res()">Resume</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="tutorial" class="modal">
+
+            <div class="modal-content">
+                <span class="modal-start">
+                    <center>
+                        <h1>Tutorial</h1>
+                        <br>
+                        <video src="./assets/tot.mp4" controls></video>
+                        <div id="keyPrompt">
+
+                        </div>
+                    </center>
+                </span>
+            </div>
+        </div>
+    <div onkeydown="nothing()" id="credits" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Game Credits</h1>
+                    Sethu Senthil - Code & Design
+                    <br>
+                    James Pan - Questions & Content
+                    <br>
+                    <button onclick="closeCredits()">Close</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="libs" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Licences</h1>
+                    <h3><a class="link-lic">phaser</a></h3>
+                    <h3><a class="link-lic">kenny</a></h3>
+                    <h3><a class="link-lic">pixel-font</a></h3>
+                    <h3><a class="link-lic">background-music</a></h3>
+                    <h3><a class="link-lic">sound-effects</a></h3>
+                    <h3><a class="link-lic">electron</a></h3>
+                    <h3><a class="link-lic">nodejs</a></h3>
+                    <button onclick="closeLibs()">Close</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <audio id="audio" src="./assets/click.mp3" ></audio>
+    <audio id="audio1" src="./assets/wrong.mp3" ></audio>
+    <audio id="audio2" src="./assets/question.mp3" ></audio>
+    <audio id="audio3" src="./assets/correct.mp3" ></audio>
+    <audio id="audio4" src="./assets/counter.mp3" ></audio>
+    <audio id="audio5" src="./assets/level.mp3" ></audio>
+
+
+    <div style="float: left;">
+        <h2>Menu</h2>
+        <br>
+        <button class="quit" onclick="quit()">
+            <h3><i class="fas fa-power-off"></i></h3>
+        </button>
+        <button  onclick="pause()">
+            <h3><i class="fas fa-pause"></i></h3>
+        </button>
+        <button class="expand" onclick="document.getElementsByTagName('CANVAS')[0].webkitRequestFullScreen(); clickSound();">
+            <h3><i class="fas fa-expand"></i></h3>
+        </button>
+        <h3 onclick="credits()">Credits</h3>
+        <h3 onclick="libs()">Open Source/ Licences</h3>
+    </div>
+
+    <div id="snackbar">loading message...</div>
+</body>
+<style>
+    audio{
+        display:none;
+    }
+    @font-face {
+  font-family: pixy;
+  src: url(04B_03__.TTF);
+}
+*{
+    font-family: pixy;
+}
+canvas{
+    margin-left:auto;
+    margin-right:auto;
+}
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-start{
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+#gameStarter{
+    display: block;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+button{
+    background: #92CD41;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  box-shadow: inset -4px -4px 0px 0px #4AA52E;
+}
+button:hover, button:focus {
+  background: #76c442;
+  box-shadow: inset -6px -6px 0px 0px #4AA52E;
+}
+.quit {
+  background: #E76E55;
+  box-shadow: inset -4px -4px 0px 0px #8C2022;
+}
+.quit:hover, .quit:focus {
+  background: #CE372B;
+  box-shadow: inset -6px -6px 0px 0px #8C2022;
+}
+.quit:active {
+  box-shadow: inset 4px 4px 0px 0px #8C2022;
+}
+.expand {
+  background: #F7D51D;
+  box-shadow: inset -4px -4px 0px 0px #E59400;
+}
+.expand:hover, .expand:focus {
+  background: #F2C409;
+  box-shadow: inset -6px -6px 0px 0px #E59400;
+}
+.expand:active {
+  box-shadow: inset 4px 4px 0px 0px #E59400;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 15px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+.shower {
+	display: none;
+	height: 0;
+	overflow: hidden;
+	transition: height 350ms ease-in-out;
+}
+.shower.is-visible {
+	display: block;
+	height: auto;
+}
+    </style>
+<script src="countUp.js"></script>
+<script src="question.js"></script>
+<script>
+    var show = function (domObj) {
+        let elem = document.getElementById(domObj);
+// Get the natural height of the element
+var getHeight = function () {
+    elem.style.display = 'block'; // Make it visible
+    var height = elem.scrollHeight + 'px'; // Get it's height
+    elem.style.display = ''; //  Hide it again
+    return height;
+};
+
+var height = getHeight(); // Get the natural height
+elem.classList.add('is-visible'); // Make the element visible
+elem.style.height = height; // Update the max-height
+
+// Once the transition is complete, remove the inline max-height so the content can scale responsively
+window.setTimeout(function () {
+    elem.style.height = '';
+}, 350);
+
+};
+
+    var options = {
+  useEasing: true,
+  useGrouping: true,
+  separator: ',',
+  decimal: '.',
+};
+    let score = 0;
+    document.onkeydown = function (evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            quit();
+        }else if(evt.keyCode == 77){
+           unfull();
+        }
+    };
+    for (let i = 0; i < document.getElementsByClassName('link-lic').length; i++) {
+        document.getElementsByClassName('link-lic')[i].href =
+            `/licences/${document.getElementsByClassName('link-lic')[i].innerText}.txt`
+    }
+    function totPlay(params) {
+
+    }
+
+    //bunch of classic JS functions to easily make element visible or invisible
+    function credits() {
+        clickSound();
+        document.getElementById('credits').style.display = 'block';
+    }
+
+    function closeCredits() {
+        clickSound();
+        document.getElementById('credits').style.display = 'none';
+    }
+
+    function libs() {
+        clickSound();
+        document.getElementById('libs').style.display = 'block';
+    }
+
+    function closeLibs() {
+        clickSound();
+        document.getElementById('libs').style.display = 'none';
+    }
+
+    function quit() {
+        window.location = "/closed.html";
+    }
+
+    function res() {
+        clickSound();
+        document.getElementById('pause').style.display = 'none';
+    }
+
+    function pause() {
+        clickSound();
+        document.getElementById('pause').style.display = 'block';
+    }
+
+    function startGame() {
+        clickSound();
+        document.getElementById('gameStarter').style.display = 'none';
+    }
+    function startGame() {
+        clickSound();
+        document.getElementById('gameStarter').style.display = 'none';
+    }
+    function tutorial() {
+        clickSound();
+        document.getElementById('tutorial').style.display = 'block';
+    }
+
+    //when level 1 completed
+    function level1Comp() {
+        unfull();
+        document.getElementById('finLevel1').style.display = 'block';
+        show('lvl1-head');
+    }
+    function nothing() {
+        console.log("nothing");
+    }
+
+    //bunch of functions to call sounds
+    function clickSound(){
+        let audio = document.getElementById("audio");
+       audio.play();
+                 }
+                 function questionSound(){
+                    let questionA = document.getElementById("audio2");
+       questionA.play();
+                 }
+                 function wrongSound(){
+                    let wrong = document.getElementById("audio1");
+       wrong.play();
+                 }
+                 function correctSound(){
+                    let cor = document.getElementById("audio3");
+       cor.play();
+                 }
+       function counterSound(){
+        let counter = document.getElementById("audio4");
+       counter.play();
+                 }
+                 function levelSound(){
+       let levels = document.getElementById("audio5");
+       levels.play();
+                 }
+    let chosen = '';
+
+    //validate function to see if the user put the right answer
+    let validate = () => {
+        if (chosen === answer1[exposedLevel]) {
+            correctSound();
+            if (confirm('Good Job! You got it right!')) document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
+            modal.style.display = "none";
+            score += 20;
+        } else {
+            wrongSound();
+            let rightAnswer = '';
+            if (level == 1) {
+                switch (answer1[exposedLevel]) {
+                    case 'a':
+                        rightAnswer = aList1[exposedLevel];
+                        break;
+                    case 'b':
+                        rightAnswer = bList1[exposedLevel];
+                    case 'c':
+                        rightAnswer = cList1[exposedLevel];
+                    case 'd':
+                        rightAnswer = dList1[exposedLevel];
+                }
+            }
+            if (confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`)) document.getElementsByTagName(
+                "CANVAS")[0].webkitRequestFullScreen();
+            console.log('user entered wrong answer');
+            modal.style.display = "none";
+        }
+    }
+//track what the user clicked
+    function a() {
+        clickSound();
+        chosen = 'a';
+        validate();
+    }
+
+    function b() {
+        clickSound();
+        chosen = 'b';
+        validate();
+    }
+
+    function c() {
+        clickSound();
+        chosen = 'c';
+        validate();
+    }
+
+    function d() {
+        clickSound();
+        chosen = 'd';
+        validate();
+    }
+
+    function snackbar(text) {
+        var x = document.getElementById("snackbar");
+        x.innerText = text;
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 3000);
+    }
+    let modal = document.getElementById('myModal');
+    let btn = document.getElementById("myBtn");
+
+    //get out of fullscreen
+    function unfull() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { //this is the one for chromeumium (which our desktop client uses)
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+//selects a random question and answer choices from question.js
+    function ask(x, l) {
+        unfull();
+        exposedLevel = x;
+        if (l == 1) { //if level 1
+            //then fill the HTML question template with the following info
+            document.getElementById('question').innerHTML = qList1[x];
+            document.getElementById('a').innerHTML = aList1[x];
+            document.getElementById('b').innerHTML = bList1[x];
+            document.getElementById('c').innerHTML = cList1[x];
+            document.getElementById('d').innerHTML = dList1[x];
+        } else if (l == 2) {
+            document.getElementById('question').innerHTML = qList2[x];
+            document.getElementById('a').innerHTML = aList2[x];
+            document.getElementById('b').innerHTML = bList2[x];
+            document.getElementById('c').innerHTML = cList2[x];
+            document.getElementById('d').innerHTML = dList2[x];
+        }
+
+
+        modal.style.display = "block";
+    }
+</script>
+<script type="text/javascript" src="phaser.min.js"></script>
+<script type="text/javascript" src="game2.js"></script>
+
+</html>

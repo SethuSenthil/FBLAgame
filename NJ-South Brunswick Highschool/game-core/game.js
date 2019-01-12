@@ -1,8 +1,12 @@
+//LEVEL 1
+
+//creates a game in the Phaser game library as well as a canvas with functions definitions
 const game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
   preload: preload,
   create: create,
   update: update })
 
+//init values before game
 let scoreText
 let platforms
 let diamonds
@@ -20,8 +24,8 @@ let qTracker = 0;
 let level = 1;
 let stopWatchStart = false;
 
+  //Preload game assets with ID's
 function preload () {
-  // Load & Define our game assets
   game.load.image('sky', 'assets/bg.gif')
   game.load.image('ground', '/assets/platform.png')
   game.load.image('dirt', '/assets/ground.png')
@@ -45,6 +49,8 @@ function preload () {
 
 
 }
+
+//allows the game to go full screen and exit out
 function gofull() {
 
   if (game.scale.isFullScreen)
@@ -58,6 +64,7 @@ function gofull() {
 
 }
 
+//creates all the elements in game
 function create () {
 
 
@@ -101,22 +108,18 @@ function create () {
       }
  //ground = platforms.create(0, game.world.height - 30, 'ground')
 
-
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-
-    //  enemy stops it from falling away when you jump on it
-
-
-    //  Now let's create two ledges
+//first block on screen
   let ledge = platforms.create(430, 430, 'ground')
   ledge.body.immovable = true
 
+  // creates  3 row ground
   for (var i = 0; i < 3; i++) {
     let Loopledge = platforms.create((550 + (i*64)), 350, 'ground')
     Loopledge.body.immovable = true
 
   }
-
+ // START: Lava box
+     //creates left ledges
   for (var i = 0; i < 3; i++) {
     let Loopledge = platforms.create((1080 + (i*64)), 250, 'rock')
     Loopledge.body.immovable = true
@@ -132,6 +135,7 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+    //puts lava inside
   for (var i = 0; i < 2 ; i++) {
     let Loopledge = hurt.create(892, 314 + (i*64), 'lava')
     Loopledge.body.immovable = true
@@ -142,16 +146,20 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+
   for (var i = 0; i < 2; i++) {
     let Loopledge = hurt.create(1020, 314 + (i*64), 'lava')
     Loopledge.body.immovable = true
 
   }
+    //creates top row of lava
   for (var i = 0; i < 3; i++) {
     let Loopledge = hurt.create(892  + (i*64),  300, 'topLava')
     Loopledge.body.immovable = false
 
   }
+
+   //creates right ledges for holder
   for (var i = 0; i < 3; i++) {
     let Loopledge = ghost.create(892  + (i*64),  442, 'rock')
     Loopledge.body.immovable = true
@@ -162,22 +170,32 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+
+  //END: Lava box
+
+  //creates some floating ledges
   for (var i = 0; i < 3; i++) {
     let Loopledge = platforms.create((1600 + (i*64)), 430, 'ground')
     Loopledge.body.immovable = true
 
   }
+
+  //creates unstable grounds where player falls easily
   for (var i = 0; i < 3; i++) {
     let Loopledge = platforms.create((1900 + (i*64)), (430-64), 'unstable')
     Loopledge.body.immovable = false
 
   }
+
+  //creates blades in ground
   for (var i = 0; i < 3; i++) {
     let Loopledge = hurt.create((1900 + (i*64)), game.world.height - 128, 'blade')
     Loopledge.body.immovable = true
 
   }
 
+
+  //START: Lava box
   for (var i = 0; i < 4; i++) {
     let Loopledge = platforms.create(1080, 250 + (i*64), 'rock')
     Loopledge.body.immovable = true
@@ -208,6 +226,9 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+  //END: Lava box
+
+  //Creates unstable elements where player easily falls
   for (var i = 0; i < 3; i++) {
     let Loopledge = platforms.create((2300 + (i*64)), 250, 'unstable')
     Loopledge.body.immovable = false
@@ -226,6 +247,8 @@ function create () {
     Loopledge.body.immovable = true
 
   }
+
+  //creates the red and green boxes which alternate
   let skippy = true;
   for (var i = 0; i < 8; i++) {
     if(skippy){
@@ -239,6 +262,7 @@ function create () {
     }
 
   }
+  //the flag that marks the end of level
   let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'ground')
   ended.body.immovable = true
 
@@ -249,11 +273,14 @@ function create () {
   player.body.bounce.y = 0.2
   player.body.gravity.y = 700
 
+  //makes sure the player dosent go outside of the map
   player.body.collideWorldBounds = true
 
+  //sets player animations as it moves right or left
   player.animations.add('left', [0, 1], 10, true)
   player.animations.add('right', [2, 3], 10, true)
 
+  //makes the target canvas area follow the player as it moves
   game.camera.follow(player);
 
 
@@ -286,6 +313,8 @@ function create () {
   cursors = game.input.keyboard.createCursorKeys()
 }
 
+
+//updates elements and event listeners that need to be updated on state change
 function update () {
 
   player.body.velocity.x = 0
@@ -353,14 +382,18 @@ function die(player, ghost) {
   clearInterval(swDevice);
   player.kill();
   unfull();
+
     document.getElementById('lost').style.display = 'block';
 }
+
+//runes when player finishes games
 function endGame(player, flager) {
   clearInterval(swDevice);
-  player.kill();
+  player.kill(); //removes player from game
   levelSound();
   level1Comp();
   setTimeout(function () {
+    show('section-score');
     counterSound();
     var numAnim = new CountUp("scoreShow", 0, score, 0, 2, options);
   if (!numAnim.error) {
@@ -370,6 +403,7 @@ function endGame(player, flager) {
   }
 
   setTimeout(function () {
+    show('section-time');
     counterSound();
     var numAnim = new CountUp("showTime", 0, time, 0, 2, options);
   if (!numAnim.error) {
@@ -378,20 +412,28 @@ function endGame(player, flager) {
       console.error(numAnim.error);
   }
 
+  let energyPoints = (score/time) * 10;
   setTimeout(function () {
+    show('section-energy');
     counterSound();
-    var numAnim = new CountUp("showEnergy", 0, (score/time), 0, 2, options);
+    var numAnim = new CountUp("showEnergy", 0, energyPoints , 2, 2, options);
   if (!numAnim.error) {
       numAnim.start();
   } else {
       console.error(numAnim.error);
   }
-  }, 1300);
-
-  }, 1300);
-
+  setTimeout(function () {
+    show('btn-leaderboard');
+  }, 1000);
+  setTimeout(function () {
+    show('btn-nextLevel');
   }, 1000);
 
+  }, 2000);
+
+  }, 2000);
+
+  }, 1000);
 }
 function stopWatch() {
   if (!stopWatchStart) {

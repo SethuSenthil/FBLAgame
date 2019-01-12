@@ -4,9 +4,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Loading...</title>
-    <meta http-equiv="refresh" content="3; url=http://localhost:2343/">
+    <meta http-equiv="refresh" content="5; url=http://localhost:2343/">
 </head>
-<body>
+<style>
+body {
+  background: #222;
+  color: #f0f0f0;
+  font-family: mlhFont !important;
+}
 
+#messenger {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-family: mlhFont;
+  font-size: 20px;
+  white-space: nowrap;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.9);
+}
+</style>
+<body>
+    <div id="messenger"></div>
 </body>
+<script>
+    let Messenger = function(el){
+      'use strict';
+      let m = this;
+
+      m.init = function(){
+        m.codeletters = "&#*+%?£@§$";
+        m.message = 0;
+        m.current_length = 0;
+        m.fadeBuffer = false;
+        m.messages = [
+          'Starting Node Server...',
+          'Preloading Assets',
+          'Feeding Cat...',
+          'Placing Blocks...',
+          'If you see a blank screen for a while, relaunch the game',
+        ];
+
+        setTimeout(m.animateIn, 100);
+      };
+
+      m.generateRandomString = function(length){
+        let random_text = '';
+        while(random_text.length < length){
+          random_text += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+        }
+
+        return random_text;
+      };
+
+      m.animateIn = function(){
+        if(m.current_length < m.messages[m.message].length){
+          m.current_length = m.current_length + 2;
+          if(m.current_length > m.messages[m.message].length) {
+            m.current_length = m.messages[m.message].length;
+          }
+
+          let message = m.generateRandomString(m.current_length);
+          $(el).html(message);
+
+          setTimeout(m.animateIn, 20);
+        } else {
+          setTimeout(m.animateFadeBuffer, 20);
+        }
+      };
+
+      m.animateFadeBuffer = function(){
+        if(m.fadeBuffer === false){
+          m.fadeBuffer = [];
+          for(let i = 0; i < m.messages[m.message].length; i++){
+            m.fadeBuffer.push({c: (Math.floor(Math.random()*12))+1, l: m.messages[m.message].charAt(i)});
+          }
+        }
+
+        let do_cycles = false;
+        let message = '';
+
+        for(let i = 0; i < m.fadeBuffer.length; i++){
+          let fader = m.fadeBuffer[i];
+          if(fader.c > 0){
+            do_cycles = true;
+            fader.c--;
+            message += m.codeletters.charAt(Math.floor(Math.random()*m.codeletters.length));
+          } else {
+            message += fader.l;
+          }
+        }
+
+        $(el).html(message);
+
+        if(do_cycles === true){
+          setTimeout(m.animateFadeBuffer, 50);
+        } else {
+          setTimeout(m.cycleText, 2000);
+        }
+      };
+
+      m.cycleText = function(){
+        m.message = m.message + 1;
+        if(m.message >= m.messages.length){
+          m.message = 0;
+        }
+
+        m.current_length = 0;
+        m.fadeBuffer = false;
+        $(el).html('');
+
+        setTimeout(m.animateIn, 200);
+      };
+
+      m.init();
+    }
+    console.clear();
+
+    let transcripter = () =>{
+     doc.getElementById('body').innerHTML = `<center> Lez Git It! <br> 'You have You Have Successfully Signed Up for', <br> 'HackSB', <br> 'See you at the South Brunsiwck Public Library', <br> 'On 9:30AM - 11PM', </center>`;
+    },
+    messenger = new Messenger($('#messenger'));
+    </script>
 </html>

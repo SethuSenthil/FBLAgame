@@ -32,9 +32,6 @@
         "AppImage",
         "deb"
       ]
-    },
-    "win": {
-      "target": "squirrel"
     }
   },
   "dependencies": {

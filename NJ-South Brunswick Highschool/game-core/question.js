@@ -1,4 +1,9 @@
-//questions and answer choices
+//Check compiledQuestions.js which is ran in production to prevent cheating
+//the ending number of the array marks the level
+//the first letter is the letter the certian choice
+//qList is an array for questions
+//answerlist is an array with the letter answer for the question of the current place in array
+
 let qList1 = ['What does FBLA stand for?','How many members does FBLA have?','What’s the official colors for FBLA?','How many goals does FBLA have?','The first FBLA state is...'];
 let aList1 = ['Future Business Leaders of America','250,000','Blue and Gold','5','Iowa'];
 let bList1 = ['Future Business Leaders of Australia','300,000','Red, White, and Blue','10','New York'];
