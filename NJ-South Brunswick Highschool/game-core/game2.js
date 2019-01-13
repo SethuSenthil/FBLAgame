@@ -41,13 +41,12 @@ function preload () {
   game.load.image('blade', '/assets/blade.png')
   game.load.image('close', '/assets/close.png')
   game.load.image('hot', '/assets/hot.png')
-  game.load.image('enemyCat', '/assets/enemy.png')
   game.load.image('blueBlock', '/assets/blueBlock.png')
   game.load.image('cold', '/assets/cold.png')
   game.load.image('flag', '/assets/flag.png')
   game.load.image('unstable', '/assets/unstable.png')
   game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
-  game.load.spritesheet('woof', '/assets/woof.png', 32, 32)
+  game.load.spritesheet('enemyCat', '/assets/enemy.png', 32, 32)
   game.load.bitmapFont('pixyfont', '/assets/font.png', '/assets/font.fnt');
   game.load.audio('coin', 'assets/coin.mp3');
   game.load.audio('bgMusic', 'assets/godsPlan.mp3');
@@ -217,7 +216,7 @@ function create () {
 
 
   }
-  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'blueblock')
+  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'flag')
   ended.body.immovable = true
 
   player = game.add.sprite(32, game.world.height - 700, 'woof')

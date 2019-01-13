@@ -456,7 +456,7 @@ window.setTimeout(function () {
 
     //validate function to see if the user put the right answer
     let validate = () => {
-        if (chosen === answer1[exposedLevel]) {
+        if (chosen === answer2[exposedLevel]) {
             correctSound();
             if (confirm('Good Job! You got it right!')) document.getElementsByTagName("CANVAS")[0].webkitRequestFullScreen();
             modal.style.display = "none";
@@ -477,7 +477,7 @@ window.setTimeout(function () {
                         rightAnswer = dList2[exposedLevel];
                 }
             }
-            if (confirm(`Wrong. The right answer is ${answer1[exposedLevel]}, ${rightAnswer}`)) document.getElementsByTagName(
+            if (confirm(`Wrong. The right answer is ${answer2[exposedLevel]}, ${rightAnswer}`)) document.getElementsByTagName(
                 "CANVAS")[0].webkitRequestFullScreen();
             console.log('user entered wrong answer');
             modal.style.display = "none";

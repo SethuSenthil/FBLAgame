@@ -263,7 +263,7 @@ function create () {
 
   }
   //the flag that marks the end of level
-  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'ground')
+  let ended = flager.create((3200 + (3*64)), game.world.height - 128, 'flag')
   ended.body.immovable = true
 
   player = game.add.sprite(32, game.world.height - 150, 'woof')
