@@ -388,6 +388,14 @@ function die(player, ghost) {
 
 //runes when player finishes games
 function endGame(player, flager) {
+  if(qTracker !== 5){
+    lose();
+    unfull();
+      document.getElementById('lost').style.display = 'block';
+    alert('You died because you didnt do all the questions');
+   reload();
+  }else{
+
   clearInterval(swDevice);
   player.kill(); //removes player from game
   levelSound();
@@ -401,7 +409,6 @@ function endGame(player, flager) {
   } else {
       console.error(numAnim.error);
   }
-
   setTimeout(function () {
     show('section-time');
     counterSound();
@@ -434,6 +441,7 @@ function endGame(player, flager) {
   }, 2000);
 
   }, 1000);
+}
 }
 function stopWatch() {
   if (!stopWatchStart) {

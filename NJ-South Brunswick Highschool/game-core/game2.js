@@ -258,8 +258,8 @@ function create () {
 
   for (var i = 1; i < 25; i++) {
     if(i>= 12 && i <= 19){
-
-    } else{
+    }else if(i >= 11){
+    }else{
       let loopQ = diamonds.create( i * 140, 0, 'diamond')
       loopQ.body.gravity.y = 1000
     loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
@@ -267,9 +267,15 @@ function create () {
   }
 
   for (var i = 1; i < 5; i++) {
-    let loopQ = qblock.create(i * 300, 0, 'question')
+    if( i === 3){
+      let loopQ = qblock.create((i * 300) - 20, 0, 'question')
       loopQ.body.gravity.y = 1000
     loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
+    }else{
+      let loopQ = qblock.create(i * 300, 0, 'question')
+      loopQ.body.gravity.y = 1000
+    loopQ.body.bounce.y = 0.2 + Math.random() * 0.1
+    }
   }
 
 
@@ -360,6 +366,8 @@ function pauser() {
 function die(player, ghost) {
   clearInterval(swDevice); //stops timer
   player.kill();
+    lose();
+
   unfull();
 
     document.getElementById('lost').style.display = 'block';
@@ -369,6 +377,14 @@ function changeDir(enemy, qblock) {
 }
 //runes when player finishes games
 function endGame(player, flager) {
+  if(qTracker !== 5){
+    lose();
+    unfull();
+      document.getElementById('lost').style.display = 'block';
+    alert('You died because you didnt do all the questions');
+   reload();
+  }else{
+
   clearInterval(swDevice);
   player.kill(); //removes player from game
   levelSound();
@@ -382,7 +398,6 @@ function endGame(player, flager) {
   } else {
       console.error(numAnim.error);
   }
-
   setTimeout(function () {
     show('section-time');
     counterSound();
@@ -415,6 +430,7 @@ function endGame(player, flager) {
   }, 2000);
 
   }, 1000);
+}
 }
 function stopWatch() {
   if (!stopWatchStart) {

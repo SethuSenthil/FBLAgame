@@ -31,24 +31,6 @@
             </center>
         </div>
     </div>
-
-    <div onkeydown="nothing()" id="gameStarter" class="modal">
-
-        <div class="modal-content">
-            <span class="modal-start">
-                <center>
-                    <h1>Cat Rush</h1>
-                    <button onclick="startGame()">Start Game</button>
-                    <br>
-                    <br>
-                    <button onclick="tutorial()" class="quit">Tutorial</button>
-                    <br>
-                    <br>
-                    <button onclick="" class="close">Leader Board</button>
-                </center>
-            </span>
-        </div>
-    </div>
     <div onkeydown="nothing()" id="lost" class="modal">
 
         <div class="modal-content">
@@ -152,6 +134,7 @@
     <audio id="audio3" src="./assets/correct.mp3" ></audio>
     <audio id="audio4" src="./assets/counter.mp3" ></audio>
     <audio id="audio5" src="./assets/level.mp3" ></audio>
+    <audio id="audio6" src="./assets/lose.mp3" ></audio>
 
 
     <div style="float: left;">
@@ -452,6 +435,11 @@ window.setTimeout(function () {
        let levels = document.getElementById("audio5");
        levels.play();
                  }
+                 function lose(){
+       let levels = document.getElementById("audio6");
+       levels.play();
+                 }
+
     let chosen = '';
 
     //validate function to see if the user put the right answer
