@@ -16,4 +16,4 @@ let aList2 = ['Future, Business, Leader','Eu Ro Wang','7','New York City, NewYor
 let bList2 = ['Service, Education, and Progress','Phillip Yamashiro','9','Trenton, New Jersey','4'];
 let cList2 = ['Progresive, Leader, Manager','Nathan Pan','3','Reston, Virgina','3'];
 let dList2 = ['Learned, Business, Skills','Sethu Senthil','5','Los Angeles, California','5'];
-let answer2 = ['b','a','d','c','c'];
+let answer2 = ['b','b','d','c','c'];
