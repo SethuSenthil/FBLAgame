@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>An Unordered HTML List</h2>
+
+<ul>
+  <li>⬆️ = jump and crouch</li>
+  <li>⬅️  = move left</li>
+  <li>➡️  = move right</li>
+</ul>  
+</body>
+</html>
