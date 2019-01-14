@@ -13,6 +13,8 @@ let diamonds
 let cursors
 let player
 let enemy
+let enemy2
+let enemy3
 let qblock
 let ghost
 let hurt
@@ -221,20 +223,34 @@ function create () {
 
   player = game.add.sprite(32, game.world.height - 700, 'woof')
   enemy = game.add.sprite(700,-80  , 'enemyCat')
+  enemy2 = game.add.sprite(3300,-80  , 'enemyCat')
+  enemy3 = game.add.sprite(2200,-80  , 'enemyCat')
+
+
 
 
   game.physics.arcade.enable(player)
   game.physics.arcade.enable(enemy)
+  game.physics.arcade.enable(enemy2)
+  game.physics.arcade.enable(enemy3)
 
 
   player.body.bounce.y = 0.2
   player.body.gravity.y = 700
   enemy.body.bounce.y = 0.2
   enemy.body.gravity.y = 700
+  enemy2.body.bounce.y = 0.2
+  enemy2.body.gravity.y = 700
+  enemy3.body.gravity.y = 700
+  enemy3.body.bounce.y = 0.2
+
 
   //makes sure the player dosent go outside of the map
   player.body.collideWorldBounds = true
   enemy.body.collideWorldBounds = true
+  enemy2.body.collideWorldBounds = true
+  enemy3.body.collideWorldBounds = true
+
 
 
   //sets player animations as it moves right or left
@@ -242,6 +258,10 @@ function create () {
   player.animations.add('right', [2, 3], 10, true)
   enemy.animations.add('left', [0, 1], 10, true)
   enemy.animations.add('right', [2, 3], 10, true)
+  enemy2.animations.add('left', [0, 1], 10, true)
+  enemy2.animations.add('right', [2, 3], 10, true)
+  enemy3.animations.add('left', [0, 1], 10, true)
+  enemy3.animations.add('right', [2, 3], 10, true)
 
   //makes the target canvas area follow the player as it moves
   game.camera.follow(player);
@@ -294,19 +314,31 @@ function update () {
 if(change){
   enemy.body.velocity.x = (depends * -1);
   enemy.animations.play('left');
+  enemy2.body.velocity.x = (depends * -1);
+  enemy2.animations.play('left');
+  enemy3.body.velocity.x = (depends * -1);
+  enemy3.animations.play('left');
 }else{
   enemy.body.velocity.x = depends;
   enemy.animations.play('right');
+  enemy2.body.velocity.x = depends;
+  enemy2.animations.play('right');
+  enemy3.body.velocity.x = depends;
+  enemy3.animations.play('right');
 }
 
 
 
   game.physics.arcade.collide(player, platforms)
   game.physics.arcade.collide(enemy, platforms)
+  game.physics.arcade.collide(enemy2, platforms)
+  game.physics.arcade.collide(enemy3, platforms)
   game.physics.arcade.collide(player, ghost)
   game.physics.arcade.collide(ghost, player)
   game.physics.arcade.collide(diamonds, platforms)
   game.physics.arcade.collide(enemyBound, qblock)
+  game.physics.arcade.collide(enemy2, enemyBound)
+  game.physics.arcade.collide(enemy3, enemyBound)
   game.physics.arcade.collide(enemy, enemyBound)
   game.physics.arcade.collide(player, enemyBound)
   game.physics.arcade.collide(qblock, platforms)
@@ -318,6 +350,10 @@ if(change){
   game.physics.arcade.overlap(player, hurt, die, null)
 
   game.physics.arcade.overlap(player, enemy, die, null)
+
+  game.physics.arcade.overlap(player, enemy2, die, null)
+
+  game.physics.arcade.overlap(player, enemy3, die, null)
 
   game.physics.arcade.overlap(player, flager, endGame, null)
 
@@ -377,7 +413,7 @@ function changeDir(enemy, qblock) {
 }
 //runes when player finishes games
 function endGame(player, flager) {
-  if(qTracker !== 5){
+  if(qTracker < 4){
     lose();
     unfull();
       document.getElementById('lost').style.display = 'block';

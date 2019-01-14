@@ -381,6 +381,7 @@ function pauser() {
 function die(player, ghost) {
   clearInterval(swDevice);
   player.kill();
+  lose();
   unfull();
 
     document.getElementById('lost').style.display = 'block';
@@ -388,7 +389,7 @@ function die(player, ghost) {
 
 //runes when player finishes games
 function endGame(player, flager) {
-  if(qTracker !== 5){
+  if(qTracker < 4){
     lose();
     unfull();
       document.getElementById('lost').style.display = 'block';

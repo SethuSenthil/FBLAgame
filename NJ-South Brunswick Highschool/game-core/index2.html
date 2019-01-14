@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FBLA - Cat Rush</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <style type="text/css">
     * {
@@ -54,7 +55,7 @@
                         <h1 class="shower" id="section-score">Score: <span id="scoreShow"></span></h1>
                         <h1 class="shower" id="section-time"><i class="fas fa-stopwatch"></i> : <span id="showTime"></span> seconds</h1>
                         <h1 class="shower" id="section-energy"><i class="fas fa-bolt"></i> : <span id="showEnergy"></span></h1>
-                        <button class="shower expand" id="btn-leaderboard">Post on Leaderboard</button>
+                        <button class="shower expand" id="btn-leaderboard">Post on score board</button>
                         <br>
                         <button class="shower" id="btn-nextLevel">Level 3</button>
                         <br>
@@ -70,6 +71,22 @@
                 <center>
                     <h1>Game Paused</h1>
                     <button onclick="res()">Resume</button>
+                    <br>
+                    <br>
+                </center>
+            </span>
+        </div>
+    </div>
+    <div onkeydown="nothing()" id="modal-score" class="modal">
+
+        <div class="modal-content">
+            <span class="modal-start">
+                <center>
+                    <h1>Level 1 Score Board</h1>
+                    <button onclick="closeScore()">Close</button>
+                    <div id="scoreContainer">
+
+                    </div>
                     <br>
                     <br>
                 </center>
@@ -155,157 +172,35 @@
 
     <div id="snackbar">loading message...</div>
 </body>
-<style>
-    audio{
-        display:none;
-    }
-    @font-face {
-  font-family: pixy;
-  src: url(04B_03__.TTF);
-}
-*{
-    font-family: pixy;
-}
-canvas{
-    margin-left:auto;
-    margin-right:auto;
-}
-    .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-}
 
-.modal-content {
-  background-color: #fefefe;
-  border: 1px solid #888;
-  width: 100%;
-  height: 100%;
-}
-
-.modal-start{
-    display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-}
-#gameStarter{
-    display: block;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-button{
-    background: #92CD41;
-  display: inline-block;
-  position: relative;
-  text-align: center;
-  font-size: 20px;
-  padding: 20px;
-  text-decoration: none;
-  color: white;
-  box-shadow: inset -4px -4px 0px 0px #4AA52E;
-}
-button:hover, button:focus {
-  background: #76c442;
-  box-shadow: inset -6px -6px 0px 0px #4AA52E;
-}
-.quit {
-  background: #E76E55;
-  box-shadow: inset -4px -4px 0px 0px #8C2022;
-}
-.quit:hover, .quit:focus {
-  background: #CE372B;
-  box-shadow: inset -6px -6px 0px 0px #8C2022;
-}
-.quit:active {
-  box-shadow: inset 4px 4px 0px 0px #8C2022;
-}
-.expand {
-  background: #F7D51D;
-  box-shadow: inset -4px -4px 0px 0px #E59400;
-}
-.expand:hover, .expand:focus {
-  background: #F2C409;
-  box-shadow: inset -6px -6px 0px 0px #E59400;
-}
-.expand:active {
-  box-shadow: inset 4px 4px 0px 0px #E59400;
-}
-
-#snackbar {
-  visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 15px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  font-size: 17px;
-}
-
-#snackbar.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
-.shower {
-	display: none;
-	height: 0;
-	overflow: hidden;
-	transition: height 350ms ease-in-out;
-}
-.shower.is-visible {
-	display: block;
-	height: auto;
-}
-    </style>
+<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDD2U_8aYjiSVgDiMfuk0vLJCvUKJgsT48",
+    authDomain: "catrush.firebaseapp.com",
+    databaseURL: "https://catrush.firebaseio.com",
+    projectId: "catrush",
+    storageBucket: "catrush.appspot.com",
+    messagingSenderId: "336940225971"
+  };
+  firebase.initializeApp(config);
+</script>
 <script src="countUp.js"></script>
+<script src="./sounds.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDD2U_8aYjiSVgDiMfuk0vLJCvUKJgsT48",
+    authDomain: "catrush.firebaseapp.com",
+    databaseURL: "https://catrush.firebaseio.com",
+    projectId: "catrush",
+    storageBucket: "catrush.appspot.com",
+    messagingSenderId: "336940225971"
+  };
+  firebase.initializeApp(config);
+</script>
 <script src="question.js"></script>
 <script>
     var show = function (domObj) {
@@ -410,36 +305,6 @@ window.setTimeout(function () {
         console.log("nothing");
     }
 
-    //bunch of functions to call sounds
-    function clickSound(){
-        let audio = document.getElementById("audio");
-       audio.play();
-                 }
-                 function questionSound(){
-                    let questionA = document.getElementById("audio2");
-       questionA.play();
-                 }
-                 function wrongSound(){
-                    let wrong = document.getElementById("audio1");
-       wrong.play();
-                 }
-                 function correctSound(){
-                    let cor = document.getElementById("audio3");
-       cor.play();
-                 }
-       function counterSound(){
-        let counter = document.getElementById("audio4");
-       counter.play();
-                 }
-                 function levelSound(){
-       let levels = document.getElementById("audio5");
-       levels.play();
-                 }
-                 function lose(){
-       let levels = document.getElementById("audio6");
-       levels.play();
-                 }
-
     let chosen = '';
 
     //validate function to see if the user put the right answer
@@ -535,6 +400,36 @@ window.setTimeout(function () {
 
         modal.style.display = "block";
     }
+
+    var db = firebase.firestore();
+let anSpeed = 1;
+ function getScore(params) {
+ db.collection('level2').get().then((snapshot) => {
+     snapshot.docs.forEach(doc => {
+         console.log(doc.data());
+         renderPosts(doc);
+     })
+ });
+ let scoreContainer = document.getElementById('scoreContainer');
+ function renderPosts(doc){
+let span = document.createElement('span');
+let h1 = document.createElement('h1');
+if(doc.data().name === userName){
+    span.innerHTML = `<mark><p style="animation: slide-up ${anSpeed}s ease; ">${doc.data().name} - ${doc.data().score}</p></mark>`;
+}else{
+    span.innerHTML = `<p style="animation: slide-up ${anSpeed}s ease; ">${doc.data().name} - ${doc.data().score}</p>`;
+}
+anSpeed += 0.5;
+scoreContainer.appendChild(span);
+ }
+    }
+
+ function postScore(){
+    db.collection("level2").add({
+    name: userName,
+    score: score
+});
+ }
 </script>
 <script type="text/javascript" src="phaser.min.js"></script>
 <script type="text/javascript" src="game2.js"></script>
