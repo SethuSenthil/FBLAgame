@@ -266,12 +266,12 @@ window.setTimeout(function () {
         clickSound();
         document.getElementById('credits').style.display = 'none';
     }
-    var userName;
+    var userName = '' ;
 
     function scoreO() {
         function myFunction() {
-  var person = prompt("Please enter your name:", "Your Name Here");
-  if (person == null || person == "") {
+  var userName = prompt("Please enter your name:", "Your Name Here");
+  if (userName == null || userName == "") {
     userName = "Unnamed";
   } else {
   }

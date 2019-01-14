@@ -55,7 +55,7 @@
                         <h1 class="shower" id="section-score">Score: <span id="scoreShow"></span></h1>
                         <h1 class="shower" id="section-time"><i class="fas fa-stopwatch"></i> : <span id="showTime"></span> seconds</h1>
                         <h1 class="shower" id="section-energy"><i class="fas fa-bolt"></i> : <span id="showEnergy"></span></h1>
-                        <button class="shower expand" id="btn-leaderboard">Post on score board</button>
+                        <button class="shower expand" id="btn-leaderboard" onclick="scoreO()">Post on score board</button>
                         <br>
                         <button class="shower" id="btn-nextLevel">Level 3</button>
                         <br>
@@ -224,6 +224,24 @@ window.setTimeout(function () {
 
 };
 
+function scoreO() {
+        function bet() {
+  var userName = prompt("Please enter your name:", "Your Name Here");
+  if (userName == null || userName == "") {
+    userName = "Unnamed";
+  } else {
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+        postScore();
+        getScore();
+        clickSound();
+        document.getElementById('modal-score').style.display = 'block';
+    }
+    function closeScore() {
+        clickSound();
+        document.getElementById('modal-score').style.display = 'none';
+    }
     var options = {
   useEasing: true,
   useGrouping: true,
