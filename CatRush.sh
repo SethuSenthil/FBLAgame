@@ -1,5 +1,5 @@
 echo "Running init command"
-echo "{Game Name} By: Sethu Senthil && James Pan"
+echo "Cat Rush - By: Sethu Senthil && James Pan"
 echo "alpha v.0.0.2"
 echo ""
 echo ""
