@@ -119,10 +119,7 @@
                     <center>
                         <h1>Tutorial</h1>
                         <br>
-                        <iframe src="./tutorial.html" frameborder="0"></iframe>
-                        <span id="keyPrompt">
 
-                        </span>
                     </center>
                 </span>
             </div>
@@ -267,12 +264,11 @@ window.setTimeout(function () {
     var userName = '' ;
 
     function scoreO() {
-  var userName = prompt("Please enter your name:", "Your Name Here");
+  userName = prompt("Please enter your name:", "Your Name Here");
   if (userName == null || userName == "") {
     userName = "Unnamed";
   } else {
   }
-  document.getElementById("demo").innerHTML = txt;
         postScore();
         getScore();
         clickSound();
@@ -315,8 +311,7 @@ window.setTimeout(function () {
         document.getElementById('gameStarter').style.display = 'none';
     }
     function tutorial() {
-        clickSound();
-        document.getElementById('tutorial').style.display = 'block';
+        window.location.href = "./tutorial.html";
     }
 
     //when level 1 completed

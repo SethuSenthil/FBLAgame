@@ -94,3 +94,29 @@ button:hover, button:focus {
 .expand:active {
   box-shadow: inset 4px 4px 0px 0px #E59400;
 }
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  .shower {
+      display: none;
+      height: 0;
+      overflow: hidden;
+      transition: height 350ms ease-in-out;
+  }
+  .shower.is-visible {
+      display: block;
+      height: auto;
+  }

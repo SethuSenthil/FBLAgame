@@ -3,16 +3,106 @@
 <link rel="stylesheet" href="style.css">
 <body>
 <center>
-<ul>
-  <li>⬆️ = jump and crouch</li>
-  <li>⬅️  = move left</li>
-  <li>➡️  = move right</li>
-  <li>📗  = question box</li>
-  <li>when you answer a queston always click ok and not cancel</li>
-  <li>🔹  = coins</li>
-  <li>Colored blocks, red blocks are dangerous. Brown, green, and grey blocks are platforms. Yellow falls down. lue blocks are either platforms or falling blocks.</li>
+  <div>
+    <h1 id="pro">loading...</h1>
+  </div>
+  <style>
+  #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
 
-</ul>
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+  </style>
+  <center><img id="imgThing" src="./assets/right.gif" alt="" style="border-radius: 25px;    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);"></center>
 <center>
+    <div id="snackbar">Loading...</div>
 </body>
+<script>
+  let tt = 0;
+  let whatDect = '';
+  let snackbar = (text) => {
+    var ele = document.getElementById('snackbar');
+    ele.innerText = text;
+    ele.className = "show";
+    setTimeout(function(){ele.className = ele.className.replace('show', ''); }, 1000);
+  }
+
+function bet() {
+  if(tt === 0){
+    document.getElementById('pro').innerText = 'Press the right arrow key to move right';
+    document.getElementById('imgThing').src = './assets/right.gif';
+    whatDect = 'ArrowRight';
+
+  }else if(tt === 1){
+    document.getElementById('pro').innerText = 'Press the left arrow key to move left';
+    document.getElementById('imgThing').src = './assets/left.gif';
+    whatDect = 'ArrowLeft';
+
+  }else if(tt === 2){
+    document.getElementById('pro').innerText = 'Press the up arrow key to jump';
+    document.getElementById('imgThing').src = './assets/up.gif';
+    whatDect = 'ArrowUp';
+
+  }
+}
+setInterval(bet, 1000);
+
+
+    window.addEventListener("keydown", function(event) {
+let key = event.code;
+
+if(key === whatDect && tt !== 2) {
+  tt++;
+  alert('Good job');
+ }else if(key === whatDect && tt === 2){
+  alert('You are done :)');
+  window.location.href = './index.html';
+ }
+
+});
+
+</script>
 </html>
