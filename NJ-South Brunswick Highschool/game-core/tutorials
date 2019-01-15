@@ -8,6 +8,11 @@
   <li>⬆️ = jump and crouch</li>
   <li>⬅️  = move left</li>
   <li>➡️  = move right</li>
+  <li>📗  = question box</li>
+  <li>when you answer a queston always click ok and not cancel</li>
+  <li>🔹  = coins</li>
+  <li>Colored blocks, red blocks are dangerous. Brown, green, and grey blocks are platforms. Yellow falls down. lue blocks are either platforms or falling blocks.</li>
+
 </ul>  
 </body>
 </html>
