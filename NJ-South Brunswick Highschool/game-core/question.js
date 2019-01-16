@@ -5,7 +5,7 @@
 //answerlist is an array with the letter answer for the question of the current place in array
 
 let qList1 = ['What does FBLA stand for?','How many members does FBLA have?','What’s the official colors for FBLA?','How many goals does FBLA have?','The first FBLA state is...'];
-let aList1 = ['Future Business Leaders of America','3000,000','Blue and Gold','5','Maryland'];
+let aList1 = ['Future Business Leaders of America','300,000','Blue and Gold','5','Maryland'];
 let bList1 = ['Future Business Leaders of Australia','250,000','Red, White, and Blue','10','New York'];
 let cList1 = ['Future Business in Los Angeles','150,000','Blue and Red','9','New Jersey'];
 let dList1 = ['Ford Business Learning Association','200,000','Green, Blue, and Red','7','Iowa'];
