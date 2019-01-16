@@ -55,21 +55,39 @@ img {
   -o-user-select: none;
   user-select: none;
 }
+#nextBtn, #ifTxt{
+display: none;
+}
   </style>
-  <center><img id="imgThing" src="./assets/right.gif" alt="" style="border-radius: 25px;    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);"></center>
+  <center><img id="imgThing" src="./assets/alert.gif" alt="" style="border-radius: 25px;    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);"><div id="ifTxt">
+      <ul>
+          <li>Lava</li>
+          <li>Other darker cats (cats can still get you even if you are answering a question if in range, unless an alert is shown or game paused)</li>
+          <li>Red blocks</li>
+          <li>Blades</li>
+          <li><b>NOT</b> attempting all questions</li>
+        </ul>
+  </div></center>
+  <br>
+  <button  onclick="add()" id="nextBtn">
+    Next
+  </button>
 <center>
-    <div id="snackbar">Loading...</div>
 </body>
 <script>
-  let tt = 0;
+  let tt = -1;
   let whatDect = '';
+
   let snackbar = (text) => {
     var ele = document.getElementById('snackbar');
     ele.innerText = text;
     ele.className = "show";
     setTimeout(function(){ele.className = ele.className.replace('show', ''); }, 1000);
   }
-
+  document.getElementById('pro').innerText = 'Always click okay on alerts';
+    whatDect = 'Enter';
+    alert('Always click okay on alerts');
+    tt++;
 function bet() {
   if(tt === 0){
     document.getElementById('pro').innerText = 'Press the right arrow key to move right';
@@ -85,6 +103,24 @@ function bet() {
     document.getElementById('pro').innerText = 'Press the up arrow key to jump';
     document.getElementById('imgThing').src = './assets/up.gif';
     whatDect = 'ArrowUp';
+  }
+  else if(tt === 3){
+    document.getElementById('pro').innerText = 'Yellow Blocks - are not stable';
+    document.getElementById('imgThing').src = './assets/yellow.gif';
+    document.getElementById('nextBtn').style.display = 'block';
+  }
+  else if(tt === 4){
+    document.getElementById('pro').innerText = 'Blue Blocks - can be stable or unstable (changes randomly)';
+    document.getElementById('imgThing').src = './assets/blue.gif';
+    document.getElementById('nextBtn').style.display = 'block';
+  }else if(tt === 5){
+    document.getElementById('pro').innerText = 'Hazards/ Causes of Death';
+    document.getElementById('imgThing').style.display = 'none';
+    document.getElementById('nextBtn').style.display = 'block';
+    document.getElementById('ifTxt').style.display = 'block';
+  }else if(tt === 6){
+alert('You are done with the tutorial! Good luck!:) ');
+window.location.href = './index.html';
 
   }
 }
@@ -94,15 +130,16 @@ setInterval(bet, 1000);
     window.addEventListener("keydown", function(event) {
 let key = event.code;
 
-if(key === whatDect && tt !== 2) {
+if(key === whatDect && tt !== 4) {
   tt++;
   alert('Good job');
- }else if(key === whatDect && tt === 2){
-  alert('You are done :)');
-  window.location.href = './index.html';
  }
 
 });
+
+function add() {
+  tt++;
+}
 
 </script>
 </html>
