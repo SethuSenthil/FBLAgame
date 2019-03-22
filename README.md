@@ -2,12 +2,12 @@
 District Winning Game for FBLA
 
 ## Project info:
-   runtime - Node.js
-   package manager - NPM
-   compatible devices - macOS & desktop browser (Google Chrome) 
-   game category: 2D platformer
-   live:(web) https://catrush.appspot.com
-   authors: Sethu narayan Senthil & James Pan
+   - runtime - Node.js
+   - package manager - NPM
+   - compatible devices - macOS & desktop browser (Google Chrome) 
+   - game category: 2D platformer
+   - live:(web) https://catrush.appspot.com
+   - authors: Sethu narayan Senthil & James Pan
    
 ## Blurb
 This repo contains our submission for the FBLA [computer game simulation programming] (https://www.fbla-pbl.org/competitive-event/computer-game-simulation-programming/) prejudged event. It has all the required features
