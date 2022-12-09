@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/SethuSenthil/FBLAgame#readme",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "opn": "^5.4.0"
   }
 }
